@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todo } from './state'
+import type { Todo } from './todo'
 
 export type TodoItemProps = Readonly<{ todo: Todo }>
 
