@@ -18,7 +18,7 @@ export const ColorPicker = () => {
           <Slider
             aria-label="slider-ex-1"
             w="400px"
-            defaultValue={30}
+            defaultValue={35}
             colorScheme={col}
           >
             <SliderTrack>
