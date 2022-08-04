@@ -1,4 +1,6 @@
 import {
+  Box,
+  Flex,
   Slider,
   SliderFilledTrack,
   SliderThumb,
@@ -6,45 +8,26 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-const Rslider = () => {
-  return (
-    <Slider aria-label="slider-ex-1" defaultValue={30} colorScheme="red">
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb />
-    </Slider>
-  )
-}
-
-const Gslider = () => {
-  return (
-    <Slider aria-label="slider-ex-2" colorScheme="green" defaultValue={30}>
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb />
-    </Slider>
-  )
-}
-
-const Bslider = () => {
-  return (
-    <Slider aria-label="slider-ex-2" colorScheme="blue" defaultValue={30}>
-      <SliderTrack>
-        <SliderFilledTrack />
-      </SliderTrack>
-      <SliderThumb />
-    </Slider>
-  )
-}
+const colors = ['red', 'green', 'blue']
 
 export const ColorPicker = () => {
   return (
-    <>
-      <Rslider />
-      <Gslider />
-      <Bslider />
-    </>
+    <Flex direction="column">
+      {colors.map(col => (
+        <Box key={col} pt={6} pb={2}>
+          <Slider
+            aria-label="slider-ex-1"
+            w="400px"
+            defaultValue={30}
+            colorScheme={col}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+        </Box>
+      ))}
+    </Flex>
   )
 }
