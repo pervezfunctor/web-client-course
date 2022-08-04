@@ -9,11 +9,6 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-// interface AddTodoFormProps {
-//   readonly show: boolean
-//   onShow(show: boolean): void
-// }
-
 export const AddTodoForm = () => {
   return (
     <Flex alignItems="center" justifyContent="center" mt="20px">
