@@ -1,26 +1,7 @@
-/* eslint-disable default-case */
-/* eslint-disable no-redeclare */
-
-import { cast } from '@core'
+import { cast, Infer, strict } from '@core'
 import { produce } from 'immer'
-import { z, ZodRawShape, ZodTypeAny } from 'zod'
-
-export const strict = <T extends ZodRawShape>(o: T) => z.object(o).strict()
-export type Infer<T extends ZodTypeAny> = Readonly<z.infer<T>> // TODO: DeepReadonly
-
-export const Todo = strict({
-  id: z.number(),
-  title: z.string(),
-  completed: z.boolean(),
-})
-
-export type Todo = Infer<typeof Todo>
-export const CreateTodo = Todo.omit({ id: true })
-export type CreateTodo = Infer<typeof CreateTodo>
-let nextId = 1000
-export function createTodo(todo: CreateTodo): Todo {
-  return { ...cast(CreateTodo, todo), id: nextId++ }
-}
+import { z } from 'zod'
+import { CreateTodo, createTodo, Todo } from './todo'
 
 export const State = z.map(z.number(), Todo)
 export type State = Infer<typeof State>

@@ -90,7 +90,7 @@ module.exports = {
     'array-callback-return': 'error',
     'class-methods-use-this': 'error',
     'constructor-super': 'error',
-    // 'default-case': ['error', { commentPattern: '^no default$' }],
+    'default-case': 'off',
     'dot-location': ['error', 'property'],
     'getter-return': 'error',
     'guard-for-in': 'error',
