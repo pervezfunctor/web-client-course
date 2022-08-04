@@ -1,5 +1,13 @@
 import produce, { castDraft } from 'immer'
 
+export const range = (start: number, end: number) => {
+  const result = []
+  for (let i = start; i <= end; i++) {
+    result.push(i)
+  }
+  return result
+}
+
 export const map = (arr: any[], f: (x: any) => any): any[] => {
   const result = []
   for (const e of arr) {
