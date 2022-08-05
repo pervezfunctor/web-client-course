@@ -16,10 +16,14 @@ const state = proxy({
   onDelete: (id: number) => {
     const todo = state.todos[id]
     const found = state.todos.indexOf(todo)
-    todos.splice(found, 1)
+    if (found) {
+      state.todos.splice(found, 1)
+    }
   },
   onUpdateTitle: (id: number, title: string) => {
     const found = state.todos[id]
-    found.title = title
+    if (found) {
+      found.title = title
+    }
   },
 })
