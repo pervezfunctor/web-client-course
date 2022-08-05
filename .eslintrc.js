@@ -28,6 +28,7 @@ module.exports = {
     react: { version: 'detect' },
   },
   rules: {
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     '@typescript-eslint/member-ordering': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
@@ -57,8 +58,6 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
     '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
     '@typescript-eslint/no-unused-expressions': 'warn',
-    'no-console': 'warn',
-    'no-debugger': 'warn',
 
     '@typescript-eslint/adjacent-overload-signatures': 'error',
     '@typescript-eslint/await-thenable': 'error',
@@ -213,7 +212,7 @@ module.exports = {
     'jsx-a11y/scope': 'error',
 
     'react/jsx-key': 'error',
-    'react/jsx-no-bind': 'error',
+    'react/jsx-no-bind': 'off',
     'react/jsx-no-comment-textnodes': 'error',
     'react/jsx-no-duplicate-props': 'error',
     'react/jsx-no-target-blank': 'error',

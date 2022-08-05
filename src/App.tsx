@@ -1,8 +1,7 @@
-import { Center, Heading } from '@chakra-ui/react'
+import { enableMapSet } from 'immer'
 import React from 'react'
+import { TodoApp } from './valtio'
 
-export const App = () => (
-  <Center>
-    <Heading color="green">Hello, World!</Heading>
-  </Center>
-)
+enableMapSet()
+
+export const App = () => <TodoApp />

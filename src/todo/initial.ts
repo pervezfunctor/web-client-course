@@ -1,4 +1,6 @@
-export const todos = [
+import { MutTodo, Todo } from './model'
+
+export const todoList = [
   {
     id: 1,
     title: 'delectus aut autem',
@@ -50,3 +52,8 @@ export const todos = [
     completed: true,
   },
 ]
+
+export const initialState = todoList.reduce(
+  (acc, v) => acc.set(v.id, v),
+  new Map<number, MutTodo>(),
+)

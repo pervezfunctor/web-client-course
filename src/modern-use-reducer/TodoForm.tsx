@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-export const AddTodoForm = () => {
+export const TodoForm = () => {
   return (
     <Flex alignItems="center" justifyContent="center" mt="20px">
       <Box

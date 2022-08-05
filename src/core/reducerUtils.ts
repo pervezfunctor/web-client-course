@@ -1,8 +1,6 @@
-import { ensure } from '@core'
 import produce from 'immer'
-import { State } from 'src/state'
-import { CreateTodo, Todo, createTodo } from 'src/todo'
 import { z } from 'zod'
+import { ensure } from './casts'
 
 export function action<Type extends string, T extends z.ZodTypeAny>(
   type: Type,
@@ -21,7 +19,7 @@ type ActionTypes<S, T extends { type: any; payload: unknown }> = {
   [K in T as K['type']]: (state: S, payload: K['payload']) => void
 }
 
-export function slice<
+export function sslice<
   State extends z.ZodTypeAny,
   Actions extends z.ZodUnion<any>,
 >(_: State, actions: Actions) {
@@ -34,38 +32,3 @@ export function slice<
     })
   }
 }
-
-const TodoAction = actions([
-  action('createTodo', CreateTodo),
-  action('deleteTodo', z.number()),
-  action('toggleTodo', z.number()),
-  action('editTodo', Todo),
-])
-
-export type TodoAction = Readonly<z.infer<typeof TodoAction>>
-
-export const todoReducer = slice(
-  State,
-  TodoAction,
-)({
-  createTodo(draft, payload) {
-    const created = createTodo(payload)
-    draft.set(created.id, created)
-  },
-
-  deleteTodo: (draft, payload) => {
-    draft.delete(payload)
-  },
-
-  editTodo: (draft, payload) => {
-    const editTodo = draft.get(payload.id)
-    draft.set(payload.id, { ...editTodo, ...payload })
-  },
-
-  toggleTodo: (draft, payload) => {
-    const toggleTodo = draft.get(payload)
-    if (toggleTodo) {
-      toggleTodo.completed = !toggleTodo.completed
-    }
-  },
-})

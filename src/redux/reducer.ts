@@ -1,10 +1,7 @@
-import { cast, Infer, strict } from '@core'
-import { produce } from 'immer'
+import { Draft, produce } from 'immer'
 import { z } from 'zod'
-import { CreateTodo, createTodo, Todo } from './todo'
-
-export const State = z.map(z.number(), Todo)
-export type State = Infer<typeof State>
+import { cast, Infer, strict } from '../core'
+import { CreateTodo, createTodo, State, Todo } from '../todo'
 
 export const Action = z.union([
   strict({ type: z.literal('createTodo'), todo: CreateTodo }),
@@ -15,7 +12,7 @@ export const Action = z.union([
 
 export type Action = Infer<typeof Action>
 
-export const todoReducer = produce((draft: State, action: Action) => {
+export const todoReducer = produce((draft: Draft<State>, action: Action) => {
   action = cast(Action, action)
 
   switch (action.type) {
