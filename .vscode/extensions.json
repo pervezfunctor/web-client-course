@@ -7,15 +7,13 @@
     "formulahendry.auto-rename-tag",
     "vincaslt.highlight-matching-tag",
     "wayou.vscode-todo-highlight",
-    "ms-vscode-remote.remote-containers",
-    "visualstudioexptteam.vscodeintellicode",
     "mhutchie.git-graph",
     "donjayamanne.githistory",
     "github.vscode-pull-request-github",
     "github.github-vscode-theme",
-    "prisma.prisma",
     "ms-edgedevtools.vscode-edge-devtools",
     "humao.rest-client",
+    "prisma.prisma",
     "rangav.vscode-thunder-client"
   ]
 }
