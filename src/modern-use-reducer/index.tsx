@@ -3,7 +3,7 @@ import React from 'react'
 import { TodoList } from './TodoList'
 import { Provider } from './state'
 
-export const App = () => (
+export const TodoApp = () => (
   <Provider>
     <Container>
       <TodoList />

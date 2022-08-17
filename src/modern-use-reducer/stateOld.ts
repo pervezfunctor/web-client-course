@@ -17,20 +17,20 @@ export const todoReducer = sslice(
 )({
   createTodo(draft, payload) {
     const created = createTodo(payload)
-    draft.set(created.id, created)
+    draft.todos.set(created.id, created)
   },
 
   deleteTodo(draft, payload) {
-    draft.delete(payload)
+    draft.todos.delete(payload)
   },
 
   editTodo(draft, payload) {
-    const editTodo = draft.get(payload.id)
-    draft.set(payload.id, { ...editTodo, ...payload })
+    const editTodo = draft.todos.get(payload.id)
+    draft.todos.set(payload.id, { ...editTodo, ...payload })
   },
 
   toggleTodo(draft, payload) {
-    const toggleTodo = draft.get(payload)
+    const toggleTodo = draft.todos.get(payload)
     if (toggleTodo) {
       toggleTodo.completed = !toggleTodo.completed
     }
