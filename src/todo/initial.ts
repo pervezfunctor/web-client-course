@@ -1,6 +1,6 @@
-import { MutTodo, Todo } from './model'
+import { Todo, State } from './model'
 
-export const todoList = [
+export const todoList: readonly Todo[] = [
   {
     id: 1,
     title: 'delectus aut autem',
@@ -53,7 +53,12 @@ export const todoList = [
   },
 ]
 
-export const initialState = todoList.reduce(
+const initialTodos = todoList.reduce(
   (acc, v) => acc.set(v.id, v),
-  new Map<number, MutTodo>(),
+  new Map<number, Todo>(),
 )
+
+export const initialState: State = {
+  todos: initialTodos,
+  filter: 'All',
+}
