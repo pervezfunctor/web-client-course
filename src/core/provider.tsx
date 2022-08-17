@@ -1,43 +1,56 @@
 import React, {
   Dispatch,
-  Reducer,
   ReducerAction,
-  ReducerState,
   useCallback,
   useLayoutEffect,
   useMemo,
 } from 'react'
 import invariant from 'tiny-invariant'
+import { useImmerReducer } from 'use-immer'
+
+type Reducer<S, A> = (prevState: S, action: A) => void
+
+type ReducerState<R extends Reducer<any, any>> = R extends Reducer<infer S, any>
+  ? S
+  : never
+
+type Selector<R extends Reducer<any, any>, A> = (snapshot: ReducerState<R>) => A
 
 export function reducerProvider<R extends Reducer<any, any>>(
   reducer: R,
   initialState: ReducerState<R>,
 ) {
-  const ReducerContext = React.createContext<
-    [ReducerState<R>, Dispatch<ReducerAction<R>>] | undefined
+  const StateContext = React.createContext<ReducerState<R> | undefined>(
+    undefined,
+  )
+
+  const DispatchContext = React.createContext<
+    Dispatch<ReducerAction<R>> | undefined
   >(undefined)
 
   const Provider = ({ children }: { children: React.ReactNode }) => {
-    const [state, dispatch] = React.useReducer(reducer, initialState)
+    const [state, dispatch] = useImmerReducer(reducer, initialState)
 
     return (
-      <ReducerContext.Provider value={[state, dispatch]}>
-        {children}
-      </ReducerContext.Provider>
+      <StateContext.Provider value={state}>
+        <DispatchContext.Provider value={dispatch}>
+          {children}
+        </DispatchContext.Provider>
+      </StateContext.Provider>
     )
   }
 
   const useSnapshot = () => {
-    const ctx = React.useContext(ReducerContext)
+    const ctx = React.useContext(StateContext)
     invariant(ctx !== undefined, 'Need ReducerProvider')
-    return ctx[0]
+    return ctx
   }
 
   const useDispatch = () => {
-    const ctx = React.useContext(ReducerContext)
+    const ctx = React.useContext(DispatchContext)
     invariant(ctx !== undefined, 'Need ReducerProvider')
 
-    return ctx[1]
+    return ctx
   }
 
   function useAction<Args extends any[]>(
@@ -56,7 +69,7 @@ export function reducerProvider<R extends Reducer<any, any>>(
     }, [])
   }
 
-  function useSelect<A>(select: (snapshot: ReducerState<R>) => A): A {
+  function useSelect<A>(select: Selector<R, A>): A {
     const snapshot = useSnapshot()
     const ref = React.useRef(select)
     useLayoutEffect(() => {

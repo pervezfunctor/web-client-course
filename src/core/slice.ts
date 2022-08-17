@@ -22,14 +22,15 @@ type ActionsCreators<State, Reducers extends ReducerObject<State>> = {
 type Reducer<State, Reducers extends ReducerObject<State>> = (
   state: State,
   action: ActionsFrom<State, Reducers>,
-) => State
+) => void
 
 export function slice<State, Reducers extends ReducerObject<State>>(
   initialState: State,
   reducers: Reducers,
 ) {
-  const reducer: Reducer<State, Reducers> = (state, action) =>
-    reducers[action.type](state, action) as any
+  const reducer: Reducer<State, Reducers> = (state, action) => {
+    reducers[action.type](state, action.payload)
+  }
 
   const actions: ActionsCreators<State, Reducers> = {} as any
   for (const type of Object.keys(reducers)) {
