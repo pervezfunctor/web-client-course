@@ -1,25 +1,33 @@
 import { proxyMap } from 'valtio/utils'
-import { CreateTodo, createTodo as create, Todo, MutTodo } from '../todo'
-import { initialState } from '../todo'
+import {
+  createTodo as create,
+  CreateTodo,
+  initialState,
+  State,
+  Todo,
+} from '../todo'
 
-export const state = proxyMap<number, MutTodo>(initialState)
+export const state: State = {
+  todos: proxyMap<number, Todo>(initialState.todos),
+  filter: 'All',
+}
 
 export function createTodo(todo: CreateTodo) {
   const created = create(todo)
-  state.set(created.id, created)
+  state.todos.set(created.id, created)
 }
 
 export function deleteTodo(id: number) {
-  state.delete(id)
+  state.todos.delete(id)
 }
 
 export function editTodo(todo: Todo) {
-  const editTodo = state.get(todo.id)
-  state.set(todo.id, { ...editTodo, ...todo })
+  const editTodo = state.todos.get(todo.id)
+  state.todos.set(todo.id, { ...editTodo, ...todo })
 }
 
 export function toggleTodo(id: number) {
-  const toggleTodo = state.get(id)
+  const toggleTodo = state.todos.get(id)
   if (toggleTodo) {
     toggleTodo.completed = !toggleTodo.completed
   }

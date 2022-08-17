@@ -39,7 +39,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 
 export const TodoList = () => {
   const snap = useSnapshot(state)
-  const todoList = Array.from(snap.values())
+  const todoList = Array.from(snap.todos.values())
 
   return (
     <Flex direction="column">
@@ -60,3 +60,5 @@ export const TodoList = () => {
     </Flex>
   )
 }
+
+// Will start class in 5 min,
