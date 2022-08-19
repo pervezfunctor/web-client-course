@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { action, actions, reducerProvider, sslice } from '../core'
+import { action, actions, reducerProvider, sslice } from '../reducer'
 import { createTodo, CreateTodo, initialState, State, Todo } from '../todo'
 
 const TodoAction = actions([
@@ -37,5 +37,7 @@ export const todoReducer = sslice(
   },
 })
 
-export const { Provider, useAction, useDispatch, useSelect, useSnapshot } =
-  reducerProvider(todoReducer, initialState)
+export const { Provider, useDispatch, useSelect, useValue } = reducerProvider(
+  todoReducer,
+  initialState,
+)

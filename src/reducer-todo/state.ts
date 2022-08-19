@@ -1,9 +1,8 @@
-import { slice } from '../core/slice'
+import { providerHook } from '../reducer'
 import { createTodo, Filter, initialState, Todo } from '../todo'
 
-export const { Provider, actions, useAction, useSnapshot, useSelect } = slice(
-  initialState,
-  {
+export const { Provider, actions, useAction, useValue, useSlice, useSelect } =
+  providerHook(initialState, {
     createTodo(draft, payload: Todo) {
       const created = createTodo(payload)
       draft.todos.set(created.id, created)
@@ -27,5 +26,4 @@ export const { Provider, actions, useAction, useSnapshot, useSelect } = slice(
     setFilter(draft, payload: Filter) {
       draft.filter = payload
     },
-  },
-)
+  })
