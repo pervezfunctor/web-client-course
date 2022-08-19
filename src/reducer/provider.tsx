@@ -40,7 +40,7 @@ export function reducerProvider<R extends Reducer<any, any>>(
     )
   }
 
-  const useSnapshot = () => {
+  const useValue = () => {
     const ctx = React.useContext(StateContext)
     invariant(ctx !== undefined, 'Need ReducerProvider')
     return ctx
@@ -70,7 +70,7 @@ export function reducerProvider<R extends Reducer<any, any>>(
   }
 
   function useSelect<A>(select: Selector<R, A>): A {
-    const snapshot = useSnapshot()
+    const snapshot = useValue()
     const ref = React.useRef(select)
     useLayoutEffect(() => {
       ref.current = select
@@ -79,5 +79,5 @@ export function reducerProvider<R extends Reducer<any, any>>(
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  return { Provider, useSnapshot, useDispatch, useSelect, useAction }
+  return { Provider, useValue, useDispatch, useSelect, useAction }
 }
