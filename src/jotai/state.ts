@@ -1,5 +1,5 @@
 import { Draft } from 'immer'
-import { atom, useSetAtom, WritableAtom } from 'jotai'
+import { atom, WritableAtom } from 'jotai'
 
 import { atomWithImmer, useImmerAtom } from 'jotai/immer'
 import { useCallback } from 'react'
