@@ -83,7 +83,6 @@ module.exports = {
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/require-array-sort-compare': 'error',
-    '@typescript-eslint/restrict-plus-operands': 'error',
     '@typescript-eslint/unified-signatures': 'error',
 
     'array-callback-return': 'error',
