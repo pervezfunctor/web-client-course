@@ -1,60 +1,47 @@
-import React from 'react'
+import { Box, Container, Input, Text } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 
-import { Button, ChakraProvider, HStack, Text } from '@chakra-ui/react'
 import { createRoot } from 'react-dom/client'
+import { reducerHook } from './reducer'
 import './index.css'
 
 const root = createRoot(document.getElementById('root')!)
 
-type CounterViewProps = {
-  count: number
-  inc: () => void
-  dec: () => void
-}
+const initial = { step: 1, count: 0 }
 
-const CounterView = React.memo(({ count, inc, dec }: CounterViewProps) => (
-  <HStack>
-    <Button onClick={inc}>+</Button>
-    <Text>{count}</Text>
-    <Button onClick={dec}>-</Button>
-  </HStack>
-))
+const useStepCount = reducerHook(initial, {
+  next(draft) {
+    draft.count = draft.count + draft.step
+  },
 
-type CounterProps = {
-  initial?: number
-}
+  setStep(draft, step: number) {
+    draft.step = step
+  },
+})
 
-const Hello = React.memo(() => <h1>Hello World</h1>)
+const Counter = () => {
+  const [{ count }, { next, setStep }] = useStepCount()
 
-const Counter = ({ initial }: CounterProps) => {
-  const [count, setCount] = React.useState(initial || 0)
+  useEffect(() => {
+    const id = setInterval(() => {
+      next()
+    }, 1000)
 
-  const inc = React.useCallback(() => {
-    setCount(count => count + 1)
-  }, [])
-
-  const dec = React.useCallback(() => {
-    setCount(count => count - 1)
+    return () => clearInterval(id)
   }, [])
 
   return (
-    <>
-      <CounterView count={count} inc={inc} dec={dec} />
-      <Hello />
-    </>
+    <Box>
+      <Text>{count}</Text>
+      <Input onChange={evt => setStep(+evt.target.value)} />
+    </Box>
   )
 }
 
-const App = () => (
-  <ChakraProvider>
-    <Counter initial={100} />
-    <Counter initial={200} />
-    <Counter initial={300} />
-  </ChakraProvider>
-)
-
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Container>
+    <React.StrictMode>
+      <Counter />
+    </React.StrictMode>
+  </Container>,
 )
