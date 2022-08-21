@@ -5,11 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "firefox",
+      "name": "Attach to Edge",
+      "port": 9222,
+      "request": "attach",
+      "type": "msedge",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Edge",
       "request": "launch",
-      "reAttach": true,
-      "name": "Launch firefox",
-      "url": "http://localhost:3000",
+      "type": "msedge",
+      "url": "http://localhost:5173",
       "webRoot": "${workspaceFolder}"
     }
   ]
