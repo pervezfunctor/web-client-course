@@ -1,7 +1,7 @@
 import { providerHook } from '../reducer'
 import { createTodo, Filter, initialState, Todo } from '../todo'
 
-export const { Provider, actions, useAction, useValue, useSlice, useSelect } =
+export const { Provider, actions, useAction, useValue, useSelect } =
   providerHook(initialState, {
     createTodo(draft, payload: Todo) {
       const created = createTodo(payload)

@@ -12,6 +12,7 @@
     "types": "tsc --noEmit -p . --watch",
     "ci": "pnpm types:ci && pnpm lint:fix && vitest run",
     "test": "vitest dev",
+    "json": "pnpm json-server --watch ./db.json",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {

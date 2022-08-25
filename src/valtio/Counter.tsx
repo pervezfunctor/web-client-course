@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, ChakraProvider, HStack, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Text } from '@chakra-ui/react'
 
 type CounterViewProps = {
   count: number
@@ -42,9 +42,9 @@ const Counter = ({ initial }: CounterProps) => {
 }
 
 export const App = () => (
-  <ChakraProvider>
+  <Box>
     <Counter initial={100} />
     <Counter initial={200} />
     <Counter initial={300} />
-  </ChakraProvider>
+  </Box>
 )

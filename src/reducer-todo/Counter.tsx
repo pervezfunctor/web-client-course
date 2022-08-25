@@ -1,4 +1,4 @@
-import { Button, ChakraProvider, HStack, Text } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { providerHook } from '../reducer'
 
@@ -30,12 +30,10 @@ export const Counter = () => {
 }
 
 export const App = () => (
-  <ChakraProvider>
-    <Provider>
-      <Counter />
-      <Counter />
-      <Counter />
-      <Counter />
-    </Provider>
-  </ChakraProvider>
+  <Provider>
+    <Counter />
+    <Counter />
+    <Counter />
+    <Counter />
+  </Provider>
 )

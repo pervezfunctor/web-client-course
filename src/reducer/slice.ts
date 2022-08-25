@@ -67,6 +67,7 @@ export function useReducer<State, Reducers extends ReducerObject<State>>(
   ],
 ) {
   const [reducer, actionCreators, initialState] = args
+  const [state, dispatch] = useImmerReducer(reducer, initialState)
 
   const actions: Actions<State, Reducers> = React.useMemo(() => {
     const result = {} as any
@@ -77,8 +78,6 @@ export function useReducer<State, Reducers extends ReducerObject<State>>(
     }
     return result
   }, [])
-
-  const [state, dispatch] = useImmerReducer(reducer, initialState)
 
   return [state, actions] as const
 }
