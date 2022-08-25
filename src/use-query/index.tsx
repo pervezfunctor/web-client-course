@@ -1,7 +1,7 @@
 import { Container } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
-import { TodoList } from './TodoList'
+import { TodoList } from './InfiniteTodoList'
 
 const queryClient = new QueryClient()
 
