@@ -9,9 +9,9 @@ const root = createRoot(document.getElementById('root')!)
 root.render(
   <ChakraProvider>
     <Container>
-      <React.StrictMode>
-        <TodoApp />
-      </React.StrictMode>
+      {/* <React.StrictMode> */}
+      <TodoApp />
+      {/* </React.StrictMode> */}
     </Container>
   </ChakraProvider>,
 )
