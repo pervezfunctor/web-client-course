@@ -1,6 +1,6 @@
 import { enableMapSet } from 'immer'
 import React from 'react'
-import { TodoApp } from './jotai'
+import { TodoApp } from './use-query'
 
 enableMapSet()
 

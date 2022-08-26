@@ -1,8 +1,4 @@
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import React from 'react'
 import { FixedSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
