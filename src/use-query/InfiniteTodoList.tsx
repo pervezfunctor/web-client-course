@@ -11,9 +11,8 @@ const iget = async ({ pageParam = 1 }) => {
   const res = await axios.get(`api/todos?_limit=${limit}&_page=${pageParam}`)
 
   const itemCount = Math.floor(Number(res.headers.get('X-Total-Count') ?? 1))
+  const totalPages = (itemCount + limit - 1) / limit
 
-  const totalPages = (itemCount + limit) / limit
-  console.log('iget')
   return { data: res.data as Todo[], totalPages, itemCount }
 }
 
@@ -26,15 +25,12 @@ export const TodoList = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery(['todos'], iget, {
-    getNextPageParam: (page, lastPages) => {
-      const nextPage =
-        lastPages.length <= page.totalPages ? lastPages.length + 1 : undefined
-      return nextPage
-    },
+    getNextPageParam: (page, lastPages) =>
+      lastPages.length <= page.totalPages ? lastPages.length + 1 : undefined,
   })
 
   const todoList = React.useMemo(
-    () => data?.pages?.flatMap(page => page.data) as Todo[],
+    () => data?.pages?.flatMap(page => page.data),
     [data],
   )
 
@@ -45,15 +41,14 @@ export const TodoList = () => {
 
   const Item = React.useMemo(
     () =>
-      ({ index, style }: any) => {
-        let content
-        if (index < todoList.length) {
-          content = todoList[index].title
-          return <div style={style}>{`${index as number}: ${content}`}</div>
-        } else {
-          return <div style={style}>loading...</div>
-        }
-      },
+      ({ index, style }: any) =>
+        todoList === undefined ? null : index < todoList.length ? (
+          <div style={style}>
+            {`${index as number}: ${todoList[index].title}`}
+          </div>
+        ) : (
+          <div style={style}>loading...</div>
+        ),
     [todoList],
   )
 
@@ -61,7 +56,7 @@ export const TodoList = () => {
     if (isFetchingNextPage) {
       return
     }
-    console.log('loadMoreItems...')
+
     fetchNextPage().catch(err => console.error(err))
   }, [fetchNextPage, isFetchingNextPage])
 
@@ -71,6 +66,10 @@ export const TodoList = () => {
 
   if (error) {
     return <h1>Server Error</h1>
+  }
+
+  if (todoList === undefined) {
+    return null
   }
 
   const isItemLoaded = (index: number) =>

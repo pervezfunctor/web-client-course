@@ -23,11 +23,11 @@ import React from 'react'
 import axios from 'redaxios'
 import { Filter, Todo } from '../todo'
 
-export type TodoItemProps = {
-  todo: Todo
+export type TodoItemProps = Readonly<{
+  todo: Readonly<Todo>
   onToggleTodo(id: Todo): void
   onDeleteTodo(id: number): void
-}
+}>
 
 export const TodoItem = ({
   todo,
@@ -62,13 +62,13 @@ const toggle = async (todo: Todo) =>
     })
   ).data
 
-export type TodoListViewProps = {
+export type TodoListViewProps = Readonly<{
   todoList: readonly Todo[]
-  onToggleTodo(id: Todo): void
-  onDeleteTodo(todo: number): void
   filter: Filter
   onFilterChange(filter: Filter): void
-}
+  onToggleTodo(id: Todo): void
+  onDeleteTodo(todo: number): void
+}>
 
 export const TodoListView = ({
   todoList,
@@ -89,7 +89,7 @@ export const TodoListView = ({
         <Tr>
           <Th>Title</Th>
           <Th>Completed</Th>
-          <Th />
+          <Th>Actions</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -132,9 +132,7 @@ export const TodoList = () => {
   const { data, error, isLoading, isPreviousData } = useQuery(
     ['todos', page],
     iget,
-    {
-      keepPreviousData: true,
-    },
+    { keepPreviousData: true },
   )
 
   const todoList = React.useMemo(
@@ -147,11 +145,16 @@ export const TodoList = () => {
     [data, filter],
   )
 
-  const invalidateTodos = {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['todos']).catch(err => console.error(err))
-    },
-  }
+  const invalidateTodos = React.useMemo(
+    () => ({
+      onSuccess: () => {
+        queryClient
+          .invalidateQueries(['todos'])
+          .catch(err => console.error(err))
+      },
+    }),
+    [queryClient],
+  )
 
   const deleteTodo = useMutation(del, invalidateTodos)
   const toggleTodo = useMutation(toggle, invalidateTodos)
@@ -179,8 +182,8 @@ export const TodoList = () => {
         filter={filter}
         onFilterChange={setFilter}
         todoList={todoList}
-        onDeleteTodo={id => deleteTodo.mutate(id)}
-        onToggleTodo={todo => toggleTodo.mutate(todo)}
+        onDeleteTodo={deleteTodo.mutate}
+        onToggleTodo={toggleTodo.mutate}
       />
 
       <ButtonGroup>
