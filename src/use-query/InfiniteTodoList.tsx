@@ -1,48 +1,40 @@
+import { Box, Button } from '@chakra-ui/react'
 import React from 'react'
-import { FixedSizeList } from 'react-window'
-import InfiniteLoader from 'react-window-infinite-loader'
-import { useInfiniteTodos } from './common'
+import { useInfiniteLoader } from '../core'
+import { Filter, Todo } from '../todo'
+import { filteredTodos, useInfiniteTodos, useTodoMutations } from './common'
+import { FilterView, TodoListView } from './components'
 
 export const TodoList = () => {
+  const [filter, setFilter] = React.useState<Filter>('All')
+  const ref = React.useRef<HTMLDivElement>(null)
+
   const {
     data,
     error,
     isLoading,
+    isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-    isFetchingNextPage,
   } = useInfiniteTodos()
 
   const todoList = React.useMemo(
-    () => data?.pages?.flatMap(page => page.data),
-    [data],
-  )
-
-  const itemCount = React.useMemo(
-    () => data?.pages[0].itemCount || 10,
-    [data?.pages],
-  )
-
-  const Item = React.useMemo(
     () =>
-      ({ index, style }: any) =>
-        todoList === undefined ? null : index < todoList.length ? (
-          <div style={style}>
-            {`${index as number}: ${todoList[index].title}`}
-          </div>
-        ) : (
-          <div style={style}>loading...</div>
-        ),
-    [todoList],
+      filteredTodos(
+        (data?.pages?.flatMap(page => page.data) as Todo[]) || [],
+        filter,
+      ),
+    [data, filter],
   )
 
-  const loadMoreItems = React.useCallback(() => {
-    if (isFetchingNextPage) {
-      return
-    }
+  useInfiniteLoader(
+    ref,
+    React.useCallback(() => {
+      fetchNextPage().catch(err => console.error(err))
+    }, [fetchNextPage]),
+  )
 
-    fetchNextPage().catch(err => console.error(err))
-  }, [fetchNextPage, isFetchingNextPage])
+  const { deleteTodo, toggleTodo } = useTodoMutations()
 
   if (isLoading) {
     return <h1>Loading...</h1>
@@ -52,31 +44,28 @@ export const TodoList = () => {
     return <h1>Server Error</h1>
   }
 
-  if (todoList === undefined) {
-    return null
-  }
-
-  const isItemLoaded = (index: number) =>
-    !hasNextPage || index < todoList.length
-
   return (
-    <InfiniteLoader
-      isItemLoaded={isItemLoaded}
-      itemCount={itemCount}
-      loadMoreItems={loadMoreItems}
-    >
-      {({ onItemsRendered, ref }) => (
-        <FixedSizeList
-          itemCount={itemCount}
-          onItemsRendered={onItemsRendered}
-          ref={ref}
-          itemSize={40}
-          width={600}
-          height={800}
-        >
-          {Item}
-        </FixedSizeList>
+    <Box>
+      <FilterView filter={filter} onFilterChange={setFilter} />
+
+      <TodoListView
+        todoList={todoList}
+        onDelete={deleteTodo.mutate}
+        onToggle={toggleTodo.mutate}
+      />
+
+      {hasNextPage && (
+        <div ref={ref}>
+          <Button
+            disabled={isFetchingNextPage}
+            onClick={() => {
+              fetchNextPage().catch(err => console.error(err))
+            }}
+          >
+            Load More
+          </Button>
+        </div>
       )}
-    </InfiniteLoader>
+    </Box>
   )
 }
