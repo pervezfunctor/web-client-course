@@ -1,44 +1,27 @@
-import {
-  Box,
-  Checkbox,
-  Flex,
-  Heading,
-  Radio,
-  RadioGroup,
-  Spinner,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
-import { paged } from '../core'
+import { Box, Flex, Heading, Spinner } from '@chakra-ui/react'
 import { atom, useAtom, useAtomValue } from 'jotai'
 import { atomWithQuery } from 'jotai/query'
 import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
+import { paged } from '../core'
 import { Filter, Todo } from '../todo'
-import { filteredTodos, itemCount, pageCount } from './common'
-import { Pagination } from './Pagination'
+import { filteredTodos, pageCount } from './common'
+import { FilterView, Pagination, TodoListView } from './components'
 
 const limitAtom = atom(15)
 const pageAtom = atom(1)
 const filterAtom = atom<Filter>('All')
 
-const resAtom = atomWithQuery(() => {
+const todosAtom = atomWithQuery(() => {
   return {
     queryKey: ['todos'],
-    queryFn: async () => {
-      const res = await axios.get(`/api/todos`)
-      return { data: res.data as readonly Todo[], itemCount: itemCount(res) }
-    },
+    queryFn: async () =>
+      (await axios.get(`/api/todos`)).data as readonly Todo[],
   }
 })
 
 const filteredTodosAtom = atom(get =>
-  filteredTodos(get(resAtom).data, get(filterAtom)),
+  filteredTodos(get(todosAtom), get(filterAtom)),
 )
 
 const todoListAtom = atom(get =>
@@ -46,39 +29,13 @@ const todoListAtom = atom(get =>
 )
 
 const pageCountAtom = atom(get =>
-  pageCount(get(resAtom).itemCount, get(limitAtom)),
+  pageCount(get(filteredTodosAtom).length, get(limitAtom)),
 )
 
-export const TodoItem = React.memo(({ todo }: { todo: Todo }) => (
-  <Tr>
-    <Td>{todo.id}</Td>
-    <Td>{todo.title}</Td>
-    <Td>
-      <Checkbox isChecked={todo.completed} />
-    </Td>
-  </Tr>
-))
-
-export const TodoListView = () => {
+const TodoListComp = () => {
   const todoList = useAtomValue(todoListAtom)
 
-  return (
-    <Table variant="simple">
-      <Thead>
-        <Tr>
-          <Th>Id</Th>
-          <Th>Title</Th>
-          <Th>Completed</Th>
-        </Tr>
-      </Thead>
-
-      <Tbody>
-        {todoList.map(todo => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
-      </Tbody>
-    </Table>
-  )
+  return <TodoListView todoList={todoList} />
 }
 
 export const TodoList = () => {
@@ -91,25 +48,12 @@ export const TodoList = () => {
   return (
     <Box>
       <Flex direction="row">
-        <RadioGroup
-          onChange={f => {
-            startTransition(() => {
-              setFilter(f as Filter)
-            })
-          }}
-          value={filter}
-        >
-          <Stack direction="row">
-            <Radio value="All">All</Radio>
-            <Radio value="Completed">Completed</Radio>
-            <Radio value="Incomplete">Incomplete</Radio>
-          </Stack>
-        </RadioGroup>
+        <FilterView filter={filter} onFilterChange={setFilter} />
         {isPending && <Spinner />}
       </Flex>
 
       <Suspense fallback={<Heading>Loading...</Heading>}>
-        <TodoListView />
+        <TodoListComp />
       </Suspense>
 
       <Pagination
