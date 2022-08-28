@@ -6,6 +6,8 @@ import { Filter } from '../todo'
 import { filteredTodos, pageCount, useTodoMutations, useTodos } from './common'
 import { FilterView, Pagination, TodoListView } from './components'
 
+// @TODO: page must change when filter changes
+
 const useTodoList = () => {
   const [limit] = React.useState(15)
   const [filter, setFilter] = React.useState<Filter>('All')
