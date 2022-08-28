@@ -1,18 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  Flex,
-  Radio,
-  RadioGroup,
-  Spinner,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
+import { Box, Flex, Spinner } from '@chakra-ui/react'
 import { atom, useAtom, useAtomValue } from 'jotai'
 import { atomWithQuery } from 'jotai/query'
 import { stringify } from 'query-string'
@@ -20,7 +6,7 @@ import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
 import { Filter, Todo } from '../todo'
 import { itemCount, pageCount } from './common'
-import { Pagination } from './Pagination'
+import { FilterView, Pagination, TodoListView } from './components'
 
 const limitAtom = atom(15)
 const pageAtom = atom(1)
@@ -48,36 +34,9 @@ const resAtom = atomWithQuery(get => ({
 const todoListAtom = atom(get => get(resAtom).data)
 const pageCountAtom = atom(get => get(resAtom).pageCount)
 
-export const TodoItem = React.memo(({ todo }: { todo: Todo }) => (
-  <Tr>
-    <Td>{todo.id}</Td>
-    <Td>{todo.title}</Td>
-    <Td>
-      <Checkbox isChecked={todo.completed} />
-    </Td>
-  </Tr>
-))
-
-export const TodoListView = () => {
+export const TodoListComp = () => {
   const todoList = useAtomValue(todoListAtom)
-
-  return (
-    <Table variant="simple">
-      <Thead>
-        <Tr>
-          <Th>Id</Th>
-          <Th>Title</Th>
-          <Th>Completed</Th>
-        </Tr>
-      </Thead>
-
-      <Tbody>
-        {todoList.map(todo => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
-      </Tbody>
-    </Table>
-  )
+  return <TodoListView todoList={todoList} />
 }
 
 export const TodoList = () => {
@@ -87,9 +46,9 @@ export const TodoList = () => {
   const [page, setPage] = useAtom(pageAtom)
   const [filter, setFilter] = useAtom(filterAtom)
 
-  const handleFilterChange = React.useCallback((filter: string) => {
+  const handleFilterChange = React.useCallback((filter: Filter) => {
     startTransition(() => {
-      setFilter(filter as Filter)
+      setFilter(filter)
     })
   }, [])
 
@@ -100,18 +59,12 @@ export const TodoList = () => {
   return (
     <Box>
       <Flex direction="row">
-        <RadioGroup onChange={handleFilterChange} value={filter}>
-          <Stack direction="row">
-            <Radio value="All">All</Radio>
-            <Radio value="Completed">Completed</Radio>
-            <Radio value="Incomplete">Incomplete</Radio>
-          </Stack>
-        </RadioGroup>
+        <FilterView filter={filter} onFilterChange={handleFilterChange} />
         {isPending && <Spinner />}
       </Flex>
 
       <Suspense fallback={<h1>Loading...</h1>}>
-        <TodoListView />
+        <TodoListComp />
       </Suspense>
 
       <Pagination
