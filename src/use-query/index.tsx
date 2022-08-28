@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { atom, Provider } from 'jotai'
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { TodoList } from './VirtualInfiniteTodoList'
+import { TodoList } from './PaginatedTodoList'
 
 const queryClient = new QueryClient()
 const queryClientAtom = atom(queryClient)

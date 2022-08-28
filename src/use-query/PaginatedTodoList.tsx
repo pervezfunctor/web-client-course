@@ -1,19 +1,13 @@
 import { Box, Spinner } from '@chakra-ui/react'
 import React from 'react'
-import { Filter } from '../todo'
-import { filteredTodos, usePagedTodos, useTodoMutations } from './common'
-import { FilterView, Pagination, TodoListView } from './components'
+import invariant from 'tiny-invariant'
+import { usePagedTodos, useTodoMutations } from './common'
+import { Pagination, TodoListView } from './components'
 
 export const TodoList = () => {
-  const [filter, setFilter] = React.useState<Filter>('All')
   const [page, setPage] = React.useState(1)
 
   const { data, error, isLoading, isPreviousData } = usePagedTodos(page)
-
-  const todoList = React.useMemo(
-    () => filteredTodos(data?.page || [], filter),
-    [data, filter],
-  )
 
   const { deleteTodo, toggleTodo } = useTodoMutations()
 
@@ -25,20 +19,21 @@ export const TodoList = () => {
     return <h1>Server Error</h1>
   }
 
+  invariant(data !== undefined)
+
   return (
     <Box>
-      <FilterView filter={filter} onFilterChange={setFilter} />
       <TodoListView
-        todoList={todoList}
+        todoList={data.page}
         onDelete={deleteTodo.mutate}
         onToggle={toggleTodo.mutate}
       />
-      {isPreviousData && <Spinner />}
       <Pagination
         current={page}
-        pageCount={todoList.length}
+        pageCount={data.pageCount}
         onPageChange={setPage}
       />
+      {isPreviousData && <Spinner />}
     </Box>
   )
 }

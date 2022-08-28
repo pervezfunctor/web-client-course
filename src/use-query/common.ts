@@ -11,6 +11,8 @@ import axios, { Response } from 'redaxios'
 import { get } from '../core'
 import { Filter, Todo } from '../todo'
 
+export const limit = 15
+
 export const itemCount = (res: Response<any>) =>
   Math.floor(Number(res.headers.get('X-Total-Count') ?? 1))
 
@@ -64,16 +66,15 @@ export const useTodoMutations = () => {
   return { deleteTodo, toggleTodo }
 }
 
-const limit = 15
-
 export const getPagedTodos = async ({
   queryKey,
 }: QueryFunctionContext<[string, number, number?]>) => {
-  const q = stringify({ _limit: queryKey[2] || limit, _page: queryKey[1] })
+  const q = stringify({ _page: queryKey[1], _limit: queryKey[2] || limit })
 
   const res = await axios.get(`api/todos?${q}`)
 
   const ic = itemCount(res)
+  console.log({ ic })
   return {
     page: res.data as Todo[],
     pageCount: pageCount(ic, limit),
