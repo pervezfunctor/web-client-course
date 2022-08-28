@@ -1,22 +1,16 @@
 import { Box, Spinner } from '@chakra-ui/react'
 import React from 'react'
 import invariant from 'tiny-invariant'
-import { usePagedTodos, useTodoMutations } from './common'
 import { Pagination, TodoListView } from './components'
+import { usePagedTodos, useTodoMutations } from './hooks'
 
 export const TodoList = () => {
   const [page, setPage] = React.useState(1)
-
-  const { data, error, isLoading, isPreviousData } = usePagedTodos(page)
-
+  const { data, isLoading, isPreviousData } = usePagedTodos(page)
   const { deleteTodo, toggleTodo } = useTodoMutations()
 
   if (isLoading) {
     return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h1>Server Error</h1>
   }
 
   invariant(data !== undefined)

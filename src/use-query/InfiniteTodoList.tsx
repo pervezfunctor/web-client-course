@@ -2,21 +2,16 @@ import { Box, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useInfiniteLoader } from '../core'
 import { Filter, Todo } from '../todo'
-import { filteredTodos, useInfiniteTodos, useTodoMutations } from './common'
+import { filteredTodos } from './common'
 import { FilterView, TodoListView } from './components'
+import { useInfiniteTodos, useTodoMutations } from './hooks'
 
 export const TodoList = () => {
   const [filter, setFilter] = React.useState<Filter>('All')
   const ref = React.useRef<HTMLDivElement>(null)
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useInfiniteTodos()
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteTodos()
 
   const todoList = React.useMemo(
     () =>
@@ -38,10 +33,6 @@ export const TodoList = () => {
 
   if (isLoading) {
     return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h1>Server Error</h1>
   }
 
   return (

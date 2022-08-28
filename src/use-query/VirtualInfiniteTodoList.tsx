@@ -1,20 +1,14 @@
 import { Checkbox, Flex, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
+import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import invariant from 'tiny-invariant'
-import { useInfiniteTodos } from './common'
-import AutoSizer from 'react-virtualized-auto-sizer'
+import { useInfiniteTodos } from './hooks'
 
 const useTodoList = () => {
-  const {
-    data,
-    error,
-    isLoading,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteTodos()
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useInfiniteTodos()
 
   const todoList = React.useMemo(
     () => data?.pages?.flatMap(page => page.data),
@@ -40,7 +34,6 @@ const useTodoList = () => {
   return {
     todoList,
     isLoading,
-    error,
     hasNextPage,
     itemCount,
     loadMoreItems,
@@ -62,15 +55,11 @@ const TodoItem = ({ data: todoList, index, style }: any) =>
   )
 
 export const TodoList = () => {
-  const { isLoading, todoList, error, isItemLoaded, itemCount, loadMoreItems } =
+  const { isLoading, todoList, isItemLoaded, itemCount, loadMoreItems } =
     useTodoList()
 
   if (isLoading) {
     return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h1>Server Error</h1>
   }
 
   invariant(todoList !== undefined, 'todolist is undefined')

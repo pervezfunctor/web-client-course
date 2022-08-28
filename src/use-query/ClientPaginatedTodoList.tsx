@@ -3,7 +3,9 @@ import React from 'react'
 import invariant from 'tiny-invariant'
 import { paged } from '../core'
 import { Filter } from '../todo'
-import { filteredTodos, pageCount, useTodoMutations, useTodos } from './common'
+import { filteredTodos, pageCount } from './common'
+import { useTodoMutations, useTodos } from './hooks'
+
 import { FilterView, Pagination, TodoListView } from './components'
 
 // @TODO: page must change when filter changes
@@ -13,7 +15,7 @@ const useTodoList = () => {
   const [filter, setFilter] = React.useState<Filter>('All')
   const [page, setPage] = React.useState(1)
 
-  const { data, error, isLoading } = useTodos()
+  const { data, isLoading } = useTodos()
 
   const filtered = React.useMemo(
     () => (data === undefined ? undefined : filteredTodos(data, filter)),
@@ -30,7 +32,6 @@ const useTodoList = () => {
 
   return {
     todoList,
-    error,
     isLoading,
     pageCount: pageCount(filtered?.length || 0, limit),
     page,
@@ -49,7 +50,6 @@ const useTodoList = () => {
 export const TodoList = () => {
   const {
     isLoading,
-    error,
     todoList,
     pageCount,
 
@@ -61,10 +61,6 @@ export const TodoList = () => {
 
   if (isLoading) {
     return <h1>Loading...</h1>
-  }
-
-  if (error) {
-    return <h1>Server Error</h1>
   }
 
   invariant(todoList !== undefined, 'todoList is undefined')
