@@ -7,7 +7,7 @@ import invariant from 'tiny-invariant'
 import { useInfiniteTodos } from './hooks'
 
 const useTodoList = () => {
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteTodos()
 
   const todoList = React.useMemo(
@@ -33,7 +33,6 @@ const useTodoList = () => {
 
   return {
     todoList,
-    isLoading,
     hasNextPage,
     itemCount,
     loadMoreItems,
@@ -55,17 +54,12 @@ const TodoItem = ({ data: todoList, index, style }: any) =>
   )
 
 export const TodoList = () => {
-  const { isLoading, todoList, isItemLoaded, itemCount, loadMoreItems } =
-    useTodoList()
-
-  if (isLoading) {
-    return <h1>Loading...</h1>
-  }
+  const { todoList, isItemLoaded, itemCount, loadMoreItems } = useTodoList()
 
   invariant(todoList !== undefined, 'todolist is undefined')
 
   return (
-    <Flex w="100%" h="100vh">
+    <Flex w="100%" h="100vh" p="5">
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
         itemCount={itemCount}

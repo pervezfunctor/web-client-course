@@ -27,11 +27,14 @@ const resAtom = atomWithQuery(get => ({
     const data = res.data as readonly Todo[]
 
     const ic = itemCount(res)
-    return { data, itemCount: ic, pageCount: pageCount(ic, Number(limit)) }
+    const pc = pageCount(ic, Number(limit))
+
+    return { data, itemCount: ic, pageCount: pc }
   },
 }))
 
 const todoListAtom = atom(get => get(resAtom).data)
+
 const pageCountAtom = atom(get => get(resAtom).pageCount)
 
 export const TodoListComp = () => {
@@ -46,6 +49,12 @@ export const TodoList = () => {
   const [page, setPage] = useAtom(pageAtom)
   const [filter, setFilter] = useAtom(filterAtom)
 
+  React.useEffect(() => {
+    if (page > pageCount) {
+      setPage(pageCount)
+    }
+  }, [pageCount])
+
   const handleFilterChange = React.useCallback((filter: Filter) => {
     startTransition(() => {
       setFilter(filter)
@@ -57,21 +66,22 @@ export const TodoList = () => {
   }, [])
 
   return (
-    <Box>
+    <Flex direction="column" h="100vh" p="5">
       <Flex direction="row">
         <FilterView filter={filter} onFilterChange={handleFilterChange} />
         {isPending && <Spinner />}
       </Flex>
 
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <TodoListComp />
-      </Suspense>
-
+      <Box flexGrow={1}>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <TodoListComp />
+        </Suspense>
+      </Box>
       <Pagination
         current={page}
         pageCount={pageCount}
         onPageChange={handlePageChange}
       />
-    </Box>
+    </Flex>
   )
 }

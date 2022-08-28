@@ -45,17 +45,23 @@ export const TodoList = () => {
   const [page, setPage] = useAtom(pageAtom)
   const [filter, setFilter] = useAtom(filterAtom)
 
+  React.useEffect(() => {
+    if (page > pageCount) {
+      setPage(pageCount)
+    }
+  }, [pageCount])
   return (
-    <Box>
+    <Flex direction="column" h="100vh" p="5">
       <Flex direction="row">
         <FilterView filter={filter} onFilterChange={setFilter} />
         {isPending && <Spinner />}
       </Flex>
 
-      <Suspense fallback={<Heading>Loading...</Heading>}>
-        <TodoListComp />
-      </Suspense>
-
+      <Box flexGrow={1}>
+        <Suspense fallback={<Heading>Loading...</Heading>}>
+          <TodoListComp />
+        </Suspense>
+      </Box>
       <Pagination
         current={page}
         pageCount={pageCount}
@@ -63,6 +69,6 @@ export const TodoList = () => {
           startTransition(() => setPage(page))
         }}
       />
-    </Box>
+    </Flex>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import invariant from 'tiny-invariant'
 import { Filter } from '../../todo'
@@ -11,7 +11,7 @@ import { VirtualTodoListView } from '../components/VirtualTodoListView'
 const useTodoList = () => {
   const [filter, setFilter] = React.useState<Filter>('All')
 
-  const { data, isLoading } = useTodos()
+  const { data } = useTodos()
 
   const todoList = React.useMemo(
     () => (data === undefined ? undefined : filteredTodos(data, filter)),
@@ -23,7 +23,6 @@ const useTodoList = () => {
   return {
     itemCount: todoList?.length || 0,
     todoList,
-    isLoading,
 
     filter,
     onFilterChange: React.useCallback(
@@ -38,7 +37,6 @@ const useTodoList = () => {
 
 export const TodoList = () => {
   const {
-    isLoading,
     todoList,
     itemCount,
 
@@ -47,14 +45,10 @@ export const TodoList = () => {
     ...actions
   } = useTodoList()
 
-  if (isLoading) {
-    return <Heading>Loading...</Heading>
-  }
-
   invariant(todoList !== undefined, 'todoList is undefined')
 
   return (
-    <Box p="10">
+    <Box p="5">
       <FilterView filter={filter} onFilterChange={actions.onFilterChange} />
 
       <VirtualTodoListView

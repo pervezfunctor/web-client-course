@@ -10,7 +10,7 @@ export const TodoList = () => {
   const [filter, setFilter] = React.useState<Filter>('All')
   const ref = React.useRef<HTMLDivElement>(null)
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteTodos()
 
   const todoList = React.useMemo(
@@ -31,12 +31,8 @@ export const TodoList = () => {
 
   const { deleteTodo, toggleTodo } = useTodoMutations()
 
-  if (isLoading) {
-    return <h1>Loading...</h1>
-  }
-
   return (
-    <Box>
+    <Box p="5">
       <FilterView filter={filter} onFilterChange={setFilter} />
 
       <TodoListView
