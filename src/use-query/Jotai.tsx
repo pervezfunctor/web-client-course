@@ -16,20 +16,15 @@ const resAtom = atomWithQuery(get => ({
   queryKey: ['todos', get(pageAtom), get(limitAtom), get(filterAtom)],
 
   queryFn: async ({ queryKey: [, page, limit, filter] }) => {
-    const q = stringify({
-      _limit: limit,
-      _page: page,
-      completed:
-        filter === 'All' ? undefined : filter === 'Completed' ? true : false,
-    })
+    const completed =
+      filter === 'All' ? undefined : filter === 'Completed' ? true : false
+    const q = stringify({ _limit: limit, _page: page, completed })
 
     const res = await axios.get(`api/todos?${q}`)
     const data = res.data as readonly Todo[]
 
     const ic = itemCount(res)
-    const pc = pageCount(ic, Number(limit))
-
-    return { data, itemCount: ic, pageCount: pc }
+    return { data, itemCount: ic, pageCount: pageCount(ic, Number(limit)) }
   },
 }))
 

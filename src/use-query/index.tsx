@@ -7,7 +7,7 @@ import {
 import { atom, Provider } from 'jotai'
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { TodoList } from './client/Jotai'
+import { TodoList } from './client/Virtual'
 
 const isProd = process.env.NODE_ENV === 'production'
 

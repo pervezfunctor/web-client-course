@@ -11,7 +11,7 @@ const useTodoList = () => {
     useInfiniteTodos()
 
   const todoList = React.useMemo(
-    () => data?.pages?.flatMap(page => page.data),
+    () => data?.pages.flatMap(page => page.data),
     [data],
   )
 
@@ -29,7 +29,7 @@ const useTodoList = () => {
   }, [fetchNextPage, isFetchingNextPage])
 
   const isItemLoaded = (index: number) =>
-    !hasNextPage || index < (todoList?.length || 0)
+    todoList !== undefined && index < todoList.length
 
   return {
     todoList,

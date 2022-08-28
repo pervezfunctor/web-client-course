@@ -2,12 +2,12 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
-  Flex,
   HStack,
   Spacer,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
+import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import { Todo } from '../../todo'
 
@@ -50,26 +50,27 @@ export const VirtualTodoListView = ({
   itemCount,
   ...actions
 }: VirtualTodoListViewProps) => {
-  const Item = ({ index, style }: any) => (
-    <span style={style}>
-      <VirtualTodoItem
-        key={todoList[index].id}
-        todo={todoList[index]}
-        {...actions}
-      />
-    </span>
-  )
-
   return (
-    <Flex p="5">
-      <FixedSizeList
-        itemCount={itemCount}
-        itemSize={40}
-        width={600}
-        height={1000}
-      >
-        {Item}
-      </FixedSizeList>
-    </Flex>
+    <AutoSizer>
+      {({ height, width }) => (
+        <FixedSizeList
+          itemData={todoList}
+          itemCount={itemCount}
+          itemSize={40}
+          width={width}
+          height={height}
+        >
+          {({ data, index, style }) => (
+            <span style={style}>
+              <VirtualTodoItem
+                key={data[index].id}
+                todo={data[index]}
+                {...actions}
+              />
+            </span>
+          )}
+        </FixedSizeList>
+      )}
+    </AutoSizer>
   )
 }

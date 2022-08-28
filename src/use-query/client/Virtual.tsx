@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import invariant from 'tiny-invariant'
 import { Filter } from '../../todo'
@@ -48,7 +48,7 @@ export const TodoList = () => {
   invariant(todoList !== undefined, 'todoList is undefined')
 
   return (
-    <Box p="5">
+    <Flex direction="column" h="90vh">
       <FilterView filter={filter} onFilterChange={actions.onFilterChange} />
 
       <VirtualTodoListView
@@ -57,6 +57,6 @@ export const TodoList = () => {
         onDelete={actions.onDelete}
         onToggle={actions.onToggle}
       />
-    </Box>
+    </Flex>
   )
 }

@@ -8,7 +8,7 @@ export type FilterViewProps = Readonly<{
 }>
 
 export const FilterView = ({ filter, onFilterChange }: FilterViewProps) => (
-  <RadioGroup onChange={onFilterChange} value={filter}>
+  <RadioGroup onChange={onFilterChange} value={filter} p="2">
     <Stack direction="row">
       <Radio value="All">All</Radio>
       <Radio value="Completed">Completed</Radio>

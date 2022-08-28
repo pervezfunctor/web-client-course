@@ -51,12 +51,6 @@ export const TodoList = () => {
   const [page, setPage] = useAtom(pageAtom)
   const [filter, setFilter] = useAtom(filterAtom)
 
-  // React.useEffect(() => {
-  //   if (page > pageCount) {
-  //     setPage(pageCount)
-  //   }
-  // }, [pageCount])
-
   return (
     <Flex direction="column" h="100vh" p="5">
       <Flex direction="row">
