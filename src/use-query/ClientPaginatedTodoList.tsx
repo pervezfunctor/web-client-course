@@ -1,89 +1,27 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Checkbox,
-  Radio,
-  RadioGroup,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import invariant from 'tiny-invariant'
-import { get, paged } from '../core'
-import { Filter, Todo } from '../todo'
-import { filteredTodos, useTodoMutations } from './common'
-import { Pagination } from './Pagination'
-
-export type TodoItemProps = Readonly<{
-  todo: Readonly<Todo>
-  onToggle(id: Todo): void
-  onDelete(id: number): void
-}>
-
-export const TodoItem = React.memo(({ todo, ...actions }: TodoItemProps) => (
-  <Tr>
-    <Td>{todo.title}</Td>
-    <Td>{todo.title}</Td>
-    <Td>
-      <Checkbox
-        isChecked={todo.completed}
-        onChange={() => actions.onToggle(todo)}
-      />
-    </Td>
-    <Td>
-      <ButtonGroup>
-        <Button>Edit</Button>
-        <Button onClick={() => actions.onDelete(todo.id)}>Delete</Button>
-      </ButtonGroup>
-    </Td>
-  </Tr>
-))
-
-export type TodoListViewProps = Readonly<{
-  todoList: readonly Todo[]
-  onToggle(id: Todo): void
-  onDelete(todo: number): void
-}>
-
-export const TodoListView = ({ todoList, ...actions }: TodoListViewProps) => (
-  <Table variant="simple">
-    <Thead>
-      <Tr>
-        <Th>Id</Th>
-        <Th>Title</Th>
-        <Th>Completed</Th>
-        <Th>Actions</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      {todoList.map(todo => (
-        <TodoItem key={todo.id} todo={todo} {...actions} />
-      ))}
-    </Tbody>
-  </Table>
-)
+import { paged } from '../core'
+import { Filter } from '../todo'
+import { filteredTodos, pageCount, useTodoMutations, useTodos } from './common'
+import { FilterView, Pagination, TodoListView } from './components'
 
 const useTodoList = () => {
-  const limit = 10
+  const [limit] = React.useState(15)
   const [filter, setFilter] = React.useState<Filter>('All')
   const [page, setPage] = React.useState(1)
 
-  const { data, error, isLoading } = useQuery(['todos'], get)
+  const { data, error, isLoading } = useTodos()
+
+  const filtered = React.useMemo(
+    () => (data === undefined ? undefined : filteredTodos(data, filter)),
+
+    [data, filter],
+  )
 
   const todoList = React.useMemo(
-    () =>
-      data === undefined
-        ? undefined
-        : paged(filteredTodos(data, filter), page, limit),
-
-    [data, filter, page, limit],
+    () => (filtered === undefined ? undefined : paged(filtered, page, limit)),
+    [filtered, page, limit],
   )
 
   const { deleteTodo, toggleTodo } = useTodoMutations()
@@ -92,7 +30,7 @@ const useTodoList = () => {
     todoList,
     error,
     isLoading,
-    total: data?.length || 0,
+    pageCount: pageCount(filtered?.length || 0, limit),
     page,
     onPageChange: setPage,
 
@@ -111,7 +49,7 @@ export const TodoList = () => {
     isLoading,
     error,
     todoList,
-    total,
+    pageCount,
 
     filter,
     page,
@@ -131,13 +69,7 @@ export const TodoList = () => {
 
   return (
     <Box>
-      <RadioGroup onChange={actions.onFilterChange} value={filter}>
-        <Stack direction="row">
-          <Radio value="All">All</Radio>
-          <Radio value="Completed">Completed</Radio>
-          <Radio value="Incomplete">Incomplete</Radio>
-        </Stack>
-      </RadioGroup>
+      <FilterView filter={filter} onFilterChange={actions.onFilterChange} />
 
       <TodoListView
         todoList={todoList}
@@ -147,7 +79,7 @@ export const TodoList = () => {
 
       <Pagination
         current={page}
-        pageCount={total}
+        pageCount={pageCount}
         onPageChange={actions.onPageChange}
       />
     </Box>
