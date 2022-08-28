@@ -2,18 +2,20 @@ import {
   QueryFunctionContext,
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from '@tanstack/react-query'
-import { stringify } from 'querystring'
+import { stringify } from 'query-string'
 import React from 'react'
 import axios, { Response } from 'redaxios'
+import { get } from '../core'
 import { Filter, Todo } from '../todo'
 
 export const itemCount = (res: Response<any>) =>
   Math.floor(Number(res.headers.get('X-Total-Count') ?? 1))
 
 export const pageCount = (itemCount: number, limit: number) =>
-  Math.floor((itemCount + limit) / limit)
+  Math.floor((itemCount + limit - 1) / limit)
 
 export const filteredTodos = (todoList: readonly Todo[], filter: Filter) =>
   todoList.filter(
@@ -32,7 +34,7 @@ export const toggle = async (todo: Todo) =>
     })
   ).data
 
-export const useInvalidateTodos = () => {
+const useInvalidateTodos = () => {
   const queryClient = useQueryClient()
 
   return React.useMemo(
@@ -62,7 +64,7 @@ export const useTodoMutations = () => {
   return { deleteTodo, toggleTodo }
 }
 
-const limit = 5
+const limit = 15
 
 export const getPagedTodos = async ({
   queryKey,
@@ -96,6 +98,11 @@ export const useInfiniteTodos = () =>
     getNextPageParam: (page, lastPages) =>
       lastPages.length <= page.pageCount ? lastPages.length + 1 : undefined,
   })
+
+export const usePagedTodos = (page: number) =>
+  useQuery(['todos', page], getPagedTodos, { keepPreviousData: true })
+
+export const useTodos = () => useQuery(['todos'], get)
 
 export const getPagefromLink = (res: Response<any>, rel: string) => {
   const link = res.headers
