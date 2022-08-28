@@ -10,7 +10,13 @@ import { FilterView, Pagination, TodoListView } from '../components'
 
 const limitAtom = atom(15)
 const pageAtom = atom(1)
-const filterAtom = atom<Filter>('All')
+
+const filterAtom = atom<Filter, Filter>('All', (get, set, _: Filter) => {
+  set(filterAtom, _)
+  if (get(pageAtom) > get(pageCountAtom)) {
+    set(pageAtom, get(pageCountAtom))
+  }
+})
 
 const todosAtom = atomWithQuery(() => {
   return {
@@ -45,11 +51,12 @@ export const TodoList = () => {
   const [page, setPage] = useAtom(pageAtom)
   const [filter, setFilter] = useAtom(filterAtom)
 
-  React.useEffect(() => {
-    if (page > pageCount) {
-      setPage(pageCount)
-    }
-  }, [pageCount])
+  // React.useEffect(() => {
+  //   if (page > pageCount) {
+  //     setPage(pageCount)
+  //   }
+  // }, [pageCount])
+
   return (
     <Flex direction="column" h="100vh" p="5">
       <Flex direction="row">
