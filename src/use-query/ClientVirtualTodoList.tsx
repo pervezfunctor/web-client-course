@@ -35,6 +35,7 @@ export const TodoItem = React.memo(({ todo, ...actions }: TodoItemProps) => (
     <Text>{todo.id}</Text>
     <Text p="2">{todo.title}</Text>
     <Spacer />
+
     <ButtonGroup>
       <Button>Edit</Button>
       <Button onClick={() => actions.onDelete(todo.id)}>Delete</Button>
@@ -62,16 +63,9 @@ export const TodoListView = ({
 
   return (
     <Flex p="5">
-      <Box>
-        <FixedSizeList
-          itemCount={total}
-          itemSize={40}
-          width={600}
-          height={1000}
-        >
-          {Item}
-        </FixedSizeList>
-      </Box>
+      <FixedSizeList itemCount={total} itemSize={40} width={600} height={1000}>
+        {Item}
+      </FixedSizeList>
     </Flex>
   )
 }
@@ -104,7 +98,7 @@ const useTodoList = () => {
   }
 
   return {
-    total: Number(data?.length || 0),
+    total: data?.length || 0,
     todoList,
     error,
     isLoading,
@@ -114,6 +108,7 @@ const useTodoList = () => {
       (s: string) => setFilter(s as Filter),
       [],
     ),
+
     onDelete: deleteTodo.mutate,
     onToggle: toggleTodo.mutate,
   } as const

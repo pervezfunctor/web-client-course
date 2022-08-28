@@ -1,20 +1,7 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
 import React from 'react'
 import { FixedSizeList } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
-import axios from 'redaxios'
-import { Todo } from '../todo'
-
-const limit = 100
-
-const iget = async ({ pageParam = 1 }) => {
-  const res = await axios.get(`api/todos?_limit=${limit}&_page=${pageParam}`)
-
-  const itemCount = Math.floor(Number(res.headers.get('X-Total-Count') ?? 1))
-  const totalPages = (itemCount + limit - 1) / limit
-
-  return { data: res.data as Todo[], totalPages, itemCount }
-}
+import { useInfiniteTodos } from './common'
 
 export const TodoList = () => {
   const {
@@ -24,10 +11,7 @@ export const TodoList = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(['todos'], iget, {
-    getNextPageParam: (page, lastPages) =>
-      lastPages.length <= page.totalPages ? lastPages.length + 1 : undefined,
-  })
+  } = useInfiniteTodos()
 
   const todoList = React.useMemo(
     () => data?.pages?.flatMap(page => page.data),
@@ -79,7 +63,6 @@ export const TodoList = () => {
     <InfiniteLoader
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
-      threshold={limit}
       loadMoreItems={loadMoreItems}
     >
       {({ onItemsRendered, ref }) => (

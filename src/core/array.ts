@@ -98,6 +98,5 @@ export const iremove = <T>(arr: T[], index: number) =>
 export const paged = <T>(arr: T[], current: number, limit: number) => {
   const page = current - 1
   const items = arr.slice(page * limit, (page + 1) * limit)
-  const pageCount = Math.floor((arr.length + limit - 1) / limit)
-  return [items, pageCount] as const
+  return items
 }

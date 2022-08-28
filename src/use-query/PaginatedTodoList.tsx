@@ -13,61 +13,41 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import {
-  QueryFunctionContext,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import axios from 'redaxios'
 import { Filter, Todo } from '../todo'
+import { filteredTodos, getPagedTodos, useTodoMutations } from './common'
 
 export type TodoItemProps = Readonly<{
   todo: Readonly<Todo>
-  onToggleTodo(id: Todo): void
-  onDeleteTodo(id: number): void
+  onToggle(id: Todo): void
+  onDelete(id: number): void
 }>
 
-export const TodoItem = ({
-  todo,
-  onDeleteTodo,
-  onToggleTodo,
-}: TodoItemProps) => (
+export const TodoItem = ({ todo, ...actions }: TodoItemProps) => (
   <Tr>
     <Td>{todo.title}</Td>
     <Td>
       <Checkbox
         isChecked={todo.completed}
-        onChange={() => onToggleTodo(todo)}
+        onChange={() => actions.onToggle(todo)}
       />
     </Td>
     <Td>
       <ButtonGroup>
         <Button>Edit</Button>
-        <Button onClick={() => onDeleteTodo(todo.id)}>Delete</Button>
+        <Button onClick={() => actions.onDelete(todo.id)}>Delete</Button>
       </ButtonGroup>
     </Td>
   </Tr>
 )
 
-const del = async (todoId: number) =>
-  (await axios.delete(`/api/todos/${todoId}`)).data
-
-const toggle = async (todo: Todo) =>
-  (
-    await axios.patch(`/api/todos/${todo.id}`, {
-      ...todo,
-      completed: !todo.completed,
-    })
-  ).data
-
 export type TodoListViewProps = Readonly<{
   todoList: readonly Todo[]
   filter: Filter
   onFilterChange(filter: Filter): void
-  onToggleTodo(id: Todo): void
-  onDeleteTodo(todo: number): void
+  onToggle(id: Todo): void
+  onDelete(todo: number): void
 }>
 
 export const TodoListView = ({
@@ -84,6 +64,7 @@ export const TodoListView = ({
         <Radio value="Incomplete">Incomplete</Radio>
       </Stack>
     </RadioGroup>
+
     <Table variant="simple" width="full">
       <Thead>
         <Tr>
@@ -101,63 +82,22 @@ export const TodoListView = ({
   </Box>
 )
 
-// const getPage = (res: Response<any>, rel: string) => {
-//   const link = res.headers
-//     .get('Link')
-//     ?.split(', ')
-//     .find(h => h.includes(`rel="${rel}"`))
-//     ?.split('; ')[0]
-//     .slice(1, -1)
-
-//   return link && Number(link?.slice(link?.lastIndexOf('_page=') + 6))
-// }
-
-const limit = 10
-
-const iget = async ({ queryKey }: QueryFunctionContext<[string, number]>) => {
-  const res = await axios.get(`api/todos?_limit=${limit}&_page=${queryKey[1]}`)
-
-  const totalPages = Math.floor(
-    (Number(res.headers.get('X-Total-Count') ?? 1) + limit - 1) / limit,
-  )
-
-  return { page: res.data, totalPages }
-}
-
 export const TodoList = () => {
-  const queryClient = useQueryClient()
   const [filter, setFilter] = React.useState<Filter>('All')
   const [page, setPage] = React.useState(1)
 
   const { data, error, isLoading, isPreviousData } = useQuery(
     ['todos', page],
-    iget,
+    getPagedTodos,
     { keepPreviousData: true },
   )
 
   const todoList = React.useMemo(
-    () =>
-      (data?.page as Todo[])?.filter(
-        t =>
-          filter === 'All' ||
-          (filter === 'Completed' ? t.completed : !t.completed),
-      ),
+    () => filteredTodos(data?.page || [], filter),
     [data, filter],
   )
 
-  const invalidateTodos = React.useMemo(
-    () => ({
-      onSuccess: () => {
-        queryClient
-          .invalidateQueries(['todos'])
-          .catch(err => console.error(err))
-      },
-    }),
-    [queryClient],
-  )
-
-  const deleteTodo = useMutation(del, invalidateTodos)
-  const toggleTodo = useMutation(toggle, invalidateTodos)
+  const { deleteTodo, toggleTodo } = useTodoMutations()
 
   if (isLoading) {
     return <h1>Loading...</h1>
@@ -167,14 +107,7 @@ export const TodoList = () => {
     return <h1>Server Error</h1>
   }
 
-  if (deleteTodo.error || toggleTodo.error) {
-    console.error({
-      deleteError: deleteTodo.error,
-      toggleTodoError: toggleTodo.error,
-    })
-  }
-
-  const totalPages = data?.totalPages || 1
+  const pageCount = data?.pageCount || 1
 
   return (
     <Box>
@@ -182,8 +115,8 @@ export const TodoList = () => {
         filter={filter}
         onFilterChange={setFilter}
         todoList={todoList}
-        onDeleteTodo={deleteTodo.mutate}
-        onToggleTodo={toggleTodo.mutate}
+        onDelete={deleteTodo.mutate}
+        onToggle={toggleTodo.mutate}
       />
 
       <ButtonGroup>
@@ -194,8 +127,8 @@ export const TodoList = () => {
           Previous
         </Button>
         <Button
-          disabled={isPreviousData || page >= totalPages}
-          onClick={() => setPage(page => Math.min(page + 1, totalPages || 1))}
+          disabled={isPreviousData || page >= pageCount}
+          onClick={() => setPage(page => Math.min(page + 1, pageCount || 1))}
         >
           Next
         </Button>
