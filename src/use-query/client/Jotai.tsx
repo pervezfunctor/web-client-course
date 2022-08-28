@@ -3,10 +3,10 @@ import { atom, useAtom, useAtomValue } from 'jotai'
 import { atomWithQuery } from 'jotai/query'
 import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
-import { paged } from '../core'
-import { Filter, Todo } from '../todo'
-import { filteredTodos, pageCount } from './common'
-import { FilterView, Pagination, TodoListView } from './components'
+import { paged } from '../../core'
+import { Filter, Todo } from '../../todo'
+import { filteredTodos, pageCount } from '../common'
+import { FilterView, Pagination, TodoListView } from '../components'
 
 const limitAtom = atom(15)
 const pageAtom = atom(1)
