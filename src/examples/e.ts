@@ -1,5 +1,5 @@
 import { z, ZodType } from 'zod'
-import { ensure, is } from '../core'
+import { ensure, is } from '@core'
 
 const Tag = z.union([z.string(), z.function()])
 type Tag = z.infer<typeof Tag>

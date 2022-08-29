@@ -1,6 +1,6 @@
 import { Box, Button, Text } from '@chakra-ui/react'
 import React from 'react'
-import { reducerHook } from '../reducer'
+import { reducerHook } from '@reducer'
 
 export const useCounter = reducerHook(
   { count: 0 },

@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { z } from 'zod'
-import { ensure } from '../core'
+import { ensure } from '@core'
 
 export function action<Type extends string, T extends z.ZodTypeAny>(
   type: Type,

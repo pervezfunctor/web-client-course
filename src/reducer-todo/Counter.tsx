@@ -1,6 +1,6 @@
 import { Button, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
-import { providerHook } from '../reducer'
+import { providerHook } from '@reducer'
 
 const { Provider, useSlice, useAction } = providerHook(
   { count: 0 },

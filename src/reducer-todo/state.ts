@@ -1,4 +1,4 @@
-import { providerHook } from '../reducer'
+import { providerHook } from '@reducer'
 import { createTodo, Filter, initialState, Todo } from '../todo'
 
 export const { Provider, actions, useAction, useValue, useSelect } =

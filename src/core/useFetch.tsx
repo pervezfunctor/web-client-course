@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'redaxios'
-import { reducer, useReducer } from '../reducer'
+import { reducer, useReducer } from '@reducer'
 import { delay } from './utils'
 
 type FetchState = Readonly<{

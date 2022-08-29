@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query'
 import { stringify } from 'query-string'
 import axios from 'redaxios'
-import { get } from '../../core'
+import { get } from '@core'
 import { Todo } from '../../todo'
 import { itemCount, limit, pageCount } from '../common'
 

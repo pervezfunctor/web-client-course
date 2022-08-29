@@ -1,4 +1,4 @@
-import { cast, Infer, strict } from '../core'
+import { cast, Infer, strict } from '@core'
 import { z } from 'zod'
 
 export const Todo = strict({

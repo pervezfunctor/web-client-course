@@ -1,6 +1,6 @@
 import { Draft, produce } from 'immer'
 import { z } from 'zod'
-import { cast, Infer, strict } from '../core'
+import { cast, Infer, strict } from '@core'
 import { CreateTodo, createTodo, State, Todo } from '../todo'
 
 export const Action = z.union([
