@@ -34,7 +34,7 @@ const useTodoList = () => {
     if (page > pc) {
       setPage(pc)
     }
-  }, [pc])
+  }, [page, pc])
 
   const onFilterChange = React.useCallback(
     (s: string) => setFilter(s as Filter),

@@ -48,17 +48,23 @@ export const TodoList = () => {
     if (page > pageCount) {
       setPage(pageCount)
     }
-  }, [pageCount])
+  }, [page, pageCount, setPage])
 
-  const handleFilterChange = React.useCallback((filter: Filter) => {
-    startTransition(() => {
-      setFilter(filter)
-    })
-  }, [])
+  const handleFilterChange = React.useCallback(
+    (filter: Filter) => {
+      startTransition(() => {
+        setFilter(filter)
+      })
+    },
+    [setFilter],
+  )
 
-  const handlePageChange = React.useCallback((page: number) => {
-    startTransition(() => setPage(page))
-  }, [])
+  const handlePageChange = React.useCallback(
+    (page: number) => {
+      startTransition(() => setPage(page))
+    },
+    [setPage],
+  )
 
   return (
     <Flex direction="column" h="100vh" p="5">

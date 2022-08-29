@@ -60,5 +60,3 @@ export const TodoList = () => {
     </Flex>
   )
 }
-
-// Will start class in 5 min,
