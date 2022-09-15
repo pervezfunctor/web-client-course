@@ -15,7 +15,7 @@ specifiers:
   '@types/react': 18.0.17
   '@types/react-beautiful-dnd': 13.1.2
   '@types/react-dom': 18.0.6
-  '@types/react-virtualized-auto-sizer': ^1.0.1
+  '@types/react-virtualized-auto-sizer': 1.0.1
   '@types/react-window': 1.8.5
   '@types/react-window-infinite-loader': 1.0.6
   '@typescript-eslint/eslint-plugin': 5.33.1
@@ -36,19 +36,20 @@ specifiers:
   framer-motion: 7.2.0
   http-status-codes: 2.2.0
   immer: 9.0.15
-  ix: ^5.0.0
+  ix: 5.0.0
   jotai: 1.8.0
   json-server: 0.17.0
   npm-check-updates: 16.0.5
   observable-hooks: 4.2.0
   prettier: 2.7.1
+  prop-types: ^15.8.1
   query-string: 7.1.1
   react: 18.2.0
   react-beautiful-dnd: 13.1.0
   react-cool-virtual: 0.7.0
   react-datepicker: 4.8.0
   react-dom: 18.2.0
-  react-error-boundary: ^3.1.4
+  react-error-boundary: 3.1.4
   react-freeze: 1.0.3
   react-icons: 4.4.0
   react-page-scroller: 2.2.1
@@ -56,7 +57,7 @@ specifiers:
   react-router-dom: '6'
   react-stepzilla: 7.0.0
   react-toastify: 9.0.8
-  react-virtualized-auto-sizer: ^1.0.6
+  react-virtualized-auto-sizer: 1.0.6
   react-window: 1.8.7
   react-window-infinite-loader: 1.0.8
   redaxios: 0.5.1
@@ -93,6 +94,7 @@ dependencies:
   ix: 5.0.0
   jotai: 1.8.0_ttj2szjgi4j3b3uuwbfdk7hedm
   observable-hooks: 4.2.0_rbo53d2g7rpwoffbhif2vigefq
+  prop-types: 15.8.1
   query-string: 7.1.1
   react: 18.2.0
   react-beautiful-dnd: 13.1.0_biqbaboplfbrettd7655fr4n2y
@@ -102,7 +104,7 @@ dependencies:
   react-error-boundary: 3.1.4_react@18.2.0
   react-freeze: 1.0.3_react@18.2.0
   react-icons: 4.4.0_react@18.2.0
-  react-page-scroller: 2.2.1_lrzw4la7yuvtfocpv5pang77wq
+  react-page-scroller: 2.2.1_3w7yzfnkvgusbgisxnwtw4nssy
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   react-stepzilla: 7.0.0_biqbaboplfbrettd7655fr4n2y
@@ -6154,7 +6156,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-page-scroller/2.2.1_lrzw4la7yuvtfocpv5pang77wq:
+  /react-page-scroller/2.2.1_3w7yzfnkvgusbgisxnwtw4nssy:
     resolution: {integrity: sha512-7Mh0sbwwbfh1+ax+kR8tXcZMzrRG3phrN67Q3sjVZ/9M1sOoqSr3TeYqYHF2XzqXhZ/Dftpf6M32xpecbfVfKg==}
     peerDependencies:
       prop-types: ^15.6.2
@@ -6163,6 +6165,7 @@ packages:
       react-router-dom: ^4.3.1
     dependencies:
       babel-polyfill: 6.26.0
+      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
