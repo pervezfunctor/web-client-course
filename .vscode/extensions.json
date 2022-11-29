@@ -14,6 +14,7 @@
     "ms-edgedevtools.vscode-edge-devtools",
     "humao.rest-client",
     "prisma.prisma",
+    "zenclabs.previewjs",
     "rangav.vscode-thunder-client"
   ]
 }
