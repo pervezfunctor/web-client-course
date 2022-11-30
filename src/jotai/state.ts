@@ -1,7 +1,7 @@
 import { Draft } from 'immer'
-import { atom, WritableAtom } from 'jotai'
+import { atom, useAtom, WritableAtom } from 'jotai'
 
-import { atomWithImmer, useImmerAtom } from 'jotai/immer'
+import { atomWithImmer } from 'jotai-immer'
 import { useCallback } from 'react'
 import {
   createTodo,
@@ -19,7 +19,7 @@ export function useSet<Value, P extends any[]>(
   atom: WritableAtom<Value, Value | ((draft: Draft<Value>) => void)>,
   fn: (draft: Draft<Value>, ...args: P) => void,
 ) {
-  const [, set] = useImmerAtom(atom)
+  const [, set] = useAtom(atom)
 
   return useCallback((...args: P) => {
     set(draft => {
