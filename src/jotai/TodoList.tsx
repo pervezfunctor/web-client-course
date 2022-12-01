@@ -13,10 +13,15 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import { useAtom } from 'jotai'
 import React from 'react'
 import { Filter, Todo } from '../todo'
-import { filterAtom, filteredTodos, useDelete, useToggle } from './state'
+import {
+  useDelete,
+  useFilteredTodos,
+  useFilterValue,
+  useToggle,
+  useUpdateFilter,
+} from './state'
 
 export type TodoItemProps = Readonly<{ todo: Todo }>
 
@@ -43,12 +48,14 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 }
 
 export const TodoList = () => {
-  const [todoList] = useAtom(filteredTodos)
-  const [filter, setFilter] = useAtom(filterAtom)
+  const todoList = useFilteredTodos()
+  const filter = useFilterValue()
+
+  const updateFilter = useUpdateFilter()
 
   return (
     <>
-      <RadioGroup onChange={evt => setFilter(evt as Filter)} value={filter}>
+      <RadioGroup onChange={evt => updateFilter(evt as Filter)} value={filter}>
         <Stack direction="row">
           <Radio value="All">All</Radio>
           <Radio value="Completed">Completed</Radio>

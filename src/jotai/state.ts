@@ -1,8 +1,7 @@
 import { Draft } from 'immer'
-import { atom, useAtom, WritableAtom } from 'jotai'
+import { atom, useAtomValue, useSetAtom } from 'jotai'
 
 import { atomWithImmer } from 'jotai-immer'
-import { useCallback } from 'react'
 import {
   createTodo,
   CreateTodo,
@@ -11,53 +10,49 @@ import {
   State,
   Todo,
 } from '../todo'
+import { useAction } from './common'
 
-export const todosAtom = atomWithImmer(initialState.todos)
-export const filterAtom = atom<Filter>('All')
+const filterAtom = atom<Filter>('All')
 
-export function useSet<Value, P extends any[]>(
-  atom: WritableAtom<Value, Value | ((draft: Draft<Value>) => void)>,
-  fn: (draft: Draft<Value>, ...args: P) => void,
-) {
-  const [, set] = useAtom(atom)
-
-  return useCallback((...args: P) => {
-    set(draft => {
-      fn(draft, ...args)
-    })
-  }, [])
+export const useFilterValue = () => {
+  return useAtomValue(filterAtom)
 }
 
-const useSetTodo = <P extends any[]>(
+export const useUpdateFilter = () => {
+  return useSetAtom(filterAtom)
+}
+
+const todosAtom = atomWithImmer(initialState.todos)
+const useTodoAction = <P extends any[]>(
   fn: (draft: Draft<State['todos']>, ...args: P) => void,
-) => useSet(todosAtom, fn)
+) => useAction(todosAtom, fn)
 
 export const useCreate = () =>
-  useSetTodo((draft, todo: CreateTodo) => {
+  useTodoAction((draft, todo: CreateTodo) => {
     const created = createTodo(todo)
     draft.set(created.id, created)
   })
 
 export const useDelete = () =>
-  useSetTodo((draft, id: number) => {
+  useTodoAction((draft, id: number) => {
     draft.delete(id)
   })
 
 export const useEdit = () =>
-  useSetTodo((draft, todo: Todo) => {
+  useTodoAction((draft, todo: Todo) => {
     const editTodo = draft.get(todo.id)
     draft.set(todo.id, { ...editTodo, ...todo })
   })
 
 export const useToggle = () =>
-  useSetTodo((draft, id: number) => {
+  useTodoAction((draft, id: number) => {
     const toggleTodo = draft.get(id)
     if (toggleTodo) {
       toggleTodo.completed = !toggleTodo.completed
     }
   })
 
-export const filteredTodos = atom(get => {
+const filteredTodosAtom = atom(get => {
   const todoList = Array.from(get(todosAtom).values())
   const filter = get(filterAtom)
 
@@ -67,3 +62,7 @@ export const filteredTodos = atom(get => {
     ? todoList.filter(t => t.completed)
     : todoList.filter(t => !t.completed)
 })
+
+export const useFilteredTodos = () => {
+  return useAtomValue(filteredTodosAtom)
+}
