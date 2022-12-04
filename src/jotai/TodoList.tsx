@@ -28,6 +28,7 @@ export type TodoItemProps = Readonly<{ todo: Todo }>
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const toggleTodo = useToggle()
   const deleteTodo = useDelete()
+
   return (
     <Tr>
       <Td>{todo.title}</Td>

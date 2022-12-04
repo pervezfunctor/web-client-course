@@ -1,6 +1,6 @@
 import { Box, Flex, Spinner } from '@chakra-ui/react'
 import { atom, useAtom, useAtomValue } from 'jotai'
-import { atomWithQuery } from 'jotai/query'
+import { atomsWithQuery } from 'jotai-tanstack-query'
 import { stringify } from 'query-string'
 import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
@@ -12,7 +12,7 @@ const limitAtom = atom(15)
 const pageAtom = atom(1)
 const filterAtom = atom<Filter>('All')
 
-const resAtom = atomWithQuery(get => ({
+const [resAtom] = atomsWithQuery(get => ({
   queryKey: ['todos', get(pageAtom), get(limitAtom), get(filterAtom)],
 
   queryFn: async ({ queryKey: [, page, limit, filter] }) => {
