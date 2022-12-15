@@ -50,6 +50,5 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
-  "js/ts.implicitProjectConfig.checkJs": false,
-  "FSharp.suggestGitignore": false
+  "js/ts.implicitProjectConfig.checkJs": false
 }
