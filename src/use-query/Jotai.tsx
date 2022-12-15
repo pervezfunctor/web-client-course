@@ -1,7 +1,7 @@
 import { Box, Flex, Spinner } from '@chakra-ui/react'
 import { atom, useAtom, useAtomValue } from 'jotai'
 import { atomsWithQuery } from 'jotai-tanstack-query'
-import { stringify } from 'query-string'
+import qs from 'query-string'
 import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
 import { Filter, Todo } from '../todo'
@@ -18,7 +18,7 @@ const [resAtom] = atomsWithQuery(get => ({
   queryFn: async ({ queryKey: [, page, limit, filter] }) => {
     const completed =
       filter === 'All' ? undefined : filter === 'Completed' ? true : false
-    const q = stringify({ _limit: limit, _page: page, completed })
+    const q = qs.stringify({ _limit: limit, _page: page, completed })
 
     const res = await axios.get(`api/todos?${q}`)
     const data = res.data as readonly Todo[]

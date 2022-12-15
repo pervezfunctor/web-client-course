@@ -3,7 +3,7 @@ import {
   useInfiniteQuery,
   useQuery,
 } from '@tanstack/react-query'
-import { stringify } from 'query-string'
+import qs from 'query-string'
 import axios from 'redaxios'
 import { get } from '@core'
 import { Todo } from '../../todo'
@@ -12,7 +12,7 @@ import { itemCount, limit, pageCount } from '../common'
 export const getPagedTodos = async ({
   queryKey,
 }: QueryFunctionContext<[string, number, number?]>) => {
-  const q = stringify({ _page: queryKey[1], _limit: queryKey[2] || limit })
+  const q = qs.stringify({ _page: queryKey[1], _limit: queryKey[2] || limit })
 
   const res = await axios.get(`api/todos?${q}`)
 
@@ -26,7 +26,7 @@ export const getPagedTodos = async ({
 }
 
 const getInfiniteTodos = async ({ pageParam = 1 }) => {
-  const q = stringify({ _limit: limit, _page: pageParam })
+  const q = qs.stringify({ _limit: limit, _page: pageParam })
   const res = await axios.get(`api/todos?${q}`)
 
   const ic = itemCount(res)
