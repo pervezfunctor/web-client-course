@@ -49,7 +49,7 @@ export const useIntersectionObserver = (
     return () => {
       observer.unobserve(node)
     }
-  }, [options, ref, ref.current])
+  }, [options, ref])
 
   return isIntersecting
 }

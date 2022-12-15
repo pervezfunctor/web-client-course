@@ -8,9 +8,12 @@ export function useAction<Value, P extends any[]>(
 ) {
   const set = useSetAtom(atom)
 
-  return React.useCallback((...args: P) => {
-    set(draft => {
-      fn(draft, ...args)
-    })
-  }, [])
+  return React.useCallback(
+    (...args: P) => {
+      set(draft => {
+        fn(draft, ...args)
+      })
+    },
+    [fn, set],
+  )
 }

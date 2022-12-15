@@ -77,7 +77,7 @@ export function useReducer<State, Reducers extends ReducerObject<State>>(
       }
     }
     return result
-  }, [])
+  }, [actionCreators, dispatch])
 
   return [state, actions] as const
 }
