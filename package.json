@@ -4,7 +4,7 @@
   "scripts": {
     "update": "pnpm add -g @pnpm/exe && pnpm ncu -u && pnpm i",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint \"./src/**/*.{js,ts,tsx}\"",
     "lint:fix": "pnpm lint --quiet --fix",
@@ -97,6 +97,7 @@
     "npm-check-updates": "16.6.0",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
+    "turbo": "^1.6.3",
     "typescript": "4.9.4",
     "vite": "4.0.1",
     "vitest": "0.25.8",
