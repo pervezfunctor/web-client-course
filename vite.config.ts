@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
 import path from 'path'
+import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
       { find: '@reducer', replacement: path.resolve(__dirname, 'src/reducer') },
     ],
   },
-  plugins: [reactRefresh()],
+  plugins: [react({ include: '**/*.tsx' })],
   server: {
     proxy: {
       '/api': {
