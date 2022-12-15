@@ -22,7 +22,7 @@ export const Counter = () => {
     }, 1000)
 
     return () => clearInterval(id)
-  }, [])
+  }, [next])
 
   return (
     <Box>
