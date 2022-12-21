@@ -9,6 +9,7 @@ const useStep = reducerHook(initial, {
     draft.count++
   },
   setStep(draft, step) {
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
     draft.step = step
   },
 })

@@ -16,9 +16,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@tanstack/react-query": "4.20.4",
     "@srtp/core": "workspace:*",
     "@srtp/reducer": "workspace:*",
+    "@tanstack/react-query": "4.20.4",
     "react-dom": "18.2.0",
     "react": "18.2.0",
     "redaxios": "0.5.1",

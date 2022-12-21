@@ -1,4 +1,8 @@
-import React from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { TodoApp } from './components'
 
-export const App = () => <TodoApp />
+export const App = () => (
+  <ChakraProvider>
+    <TodoApp />
+  </ChakraProvider>
+)

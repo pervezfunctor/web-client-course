@@ -15,6 +15,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: 'tsconfig.json',
     sourceType: 'module',
   },
   plugins: [
@@ -90,7 +91,7 @@ module.exports = {
     ],
     'dot-location': ['error', 'property'],
     'eol-last': 'off',
-    'functional/immutable-data': 'error',
+    // 'functional/immutable-data': 'off',
     'functional/no-class': 'error',
     'functional/no-let': 'error',
     'functional/no-this-expression': 'error',
@@ -176,7 +177,6 @@ module.exports = {
     'no-octal-escape': 'error',
     'no-octal': 'error',
     'no-param-reassign': 'error',
-    'no-redeclare': 'error',
     'no-regex-spaces': 'error',
     'no-restricted-syntax': ['error', 'WithStatement'],
     'no-return-await': 'error',
@@ -230,7 +230,6 @@ module.exports = {
     'react/jsx-curly-spacing': 'off',
     'react/jsx-equals-spacing': 'off',
     'react/jsx-key': 'error',
-    'react/jsx-no-bind': 'error',
     'react/jsx-no-comment-textnodes': 'error',
     'react/jsx-no-duplicate-props': 'error',
     'react/jsx-no-target-blank': 'error',

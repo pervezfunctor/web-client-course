@@ -5,7 +5,7 @@ import {
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query'
 import { atom, Provider } from 'jotai'
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { TodoList } from './client/Virtual'
 

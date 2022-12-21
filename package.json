@@ -9,6 +9,6 @@
     "build": "pnpm turbo build",
     "test": "pnpm turbo test",
     "dev": "pnpm turbo dev",
-    "ci": "pnpm run types lint test"
+    "ci": "pnpm run types lint"
   }
 }

@@ -29,8 +29,6 @@ export const TodoItem = React.memo(
     const onDelete = useAction(() => deleteTodo(id))
     const onToggle = useAction(() => toggleTodo(id))
 
-    console.count('todo-item: ')
-
     return (
       <Tr>
         <Td>{title}</Td>

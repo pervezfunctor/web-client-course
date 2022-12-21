@@ -1,4 +1,4 @@
-export const map = (arr: any[], f: (x: any) => any): any[] => {
+export function map<T1, T2>(arr: T1[], f: (x: T1) => T2): T2[] {
   const result = []
   for (const e of arr) {
     result.push(f(e))
@@ -6,7 +6,7 @@ export const map = (arr: any[], f: (x: any) => any): any[] => {
   return result
 }
 
-export const filter = (arr: any[], pred: (x: any) => boolean): any[] => {
+export function filter<T>(arr: T[], pred: (x: T) => boolean): T[] {
   const result = []
   for (const e of arr) {
     if (pred(e)) {
@@ -16,11 +16,11 @@ export const filter = (arr: any[], pred: (x: any) => boolean): any[] => {
   return result
 }
 
-export const reduce = (
-  arr: any[],
-  f: (x: any, acc: any) => any,
-  init: any,
-): any => {
+export function reduce<T1, T2>(
+  arr: T1[],
+  f: (x: T1, acc: T2) => T2,
+  init: T2,
+): T2 {
   let result = init
 
   for (const e of arr) {
