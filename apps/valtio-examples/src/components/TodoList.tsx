@@ -10,9 +10,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import React from 'react'
-import { useSnapshot } from 'valtio'
 import { Todo } from '@srtp/todo'
+import React from 'react'
 import { deleteTodo, state, toggleTodo } from './state'
 
 export type TodoItemProps = Readonly<{ todo: Todo }>
@@ -38,8 +37,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 }
 
 export const TodoList = () => {
-  const snap = useSnapshot(state)
-  const todoList = Array.from(snap.todos.values())
+  const todoList = Array.from(state.todos.values())
 
   return (
     <Flex direction="column">
