@@ -14,6 +14,7 @@ importers:
       '@chakra-ui/styled-system': 2.4.0
       '@emotion/react': 11.10.5
       '@emotion/styled': 11.10.5
+      '@react-spring/web': 9.6.0
       '@srtp/core': workspace:*
       '@srtp/todo': workspace:*
       '@testing-library/react': 13.4.0
@@ -33,6 +34,7 @@ importers:
       eslint-plugin-react-hooks: 4.6.0
       eslint-plugin-unicorn: 45.0.2
       framer-motion: 8.0.0
+      html-react-parser: 3.0.4
       immer: 9.0.16
       jotai: 1.12.0
       jotai-immer: 0.1.0
@@ -56,9 +58,11 @@ importers:
       '@chakra-ui/styled-system': 2.4.0
       '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
       '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
+      '@react-spring/web': 9.6.0_biqbaboplfbrettd7655fr4n2y
       '@srtp/core': link:../../libs/core
       '@srtp/todo': link:../../packages/todo
       framer-motion: 8.0.0_biqbaboplfbrettd7655fr4n2y
+      html-react-parser: 3.0.4_react@18.2.0
       immer: 9.0.16
       jotai: 1.12.0_ldhptygwmnff4nrhjg35c5utke
       jotai-immer: 0.1.0_dp24wn5ahba4izfoliy5lo56qy
