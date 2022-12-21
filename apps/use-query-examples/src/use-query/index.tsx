@@ -5,7 +5,7 @@ import {
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query'
 import { atom, Provider } from 'jotai'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { TodoList } from './client/Virtual'
 
@@ -39,11 +39,13 @@ export const TodoApp = () => {
 
   return (
     <ErrorBoundary onReset={reset} FallbackComponent={Fallback}>
-      <QueryClientProvider client={queryClient}>
-        <Provider initialValues={[[queryClientAtom, queryClient]]}>
-          <TodoList />
-        </Provider>
-      </QueryClientProvider>
+      <Suspense fallback={<Heading>Loading...</Heading>}>
+        <QueryClientProvider client={queryClient}>
+          <Provider initialValues={[[queryClientAtom, queryClient]]}>
+            <TodoList />
+          </Provider>
+        </QueryClientProvider>
+      </Suspense>
     </ErrorBoundary>
   )
 }
