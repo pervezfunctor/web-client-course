@@ -9,7 +9,7 @@ import {
   initialState,
   State,
   Todo,
-} from '../todo'
+} from '@srtp/todo'
 import { useAction } from './common'
 
 const filterAtom = atom<Filter>('All')

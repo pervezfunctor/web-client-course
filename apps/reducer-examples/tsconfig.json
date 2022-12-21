@@ -1,0 +1,17 @@
+{
+  "extends": "@srtp/tsconfig/next.json",
+
+  "compilerOptions": {
+    "incremental": true
+  },
+
+  "include": [
+    "pages/**/*.ts*",
+    "components",
+    "next.config.js",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

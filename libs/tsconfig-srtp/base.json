@@ -22,7 +22,6 @@
     "module": "ESNext",
     "resolveJsonModule": true,
     "noEmit": true,
-    "jsx": "react",
     "checkJs": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -31,5 +30,6 @@
     "noImplicitThis": true,
     "sourceMap": true
   },
+
   "exclude": ["node_modules"]
 }

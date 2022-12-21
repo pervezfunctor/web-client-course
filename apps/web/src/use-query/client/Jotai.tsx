@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Spinner } from '@chakra-ui/react'
+import { paged } from '@srtp/core'
+import { Filter, Todo } from '@srtp/todo'
 import { atom, useAtom, useAtomValue } from 'jotai'
 import { atomWithQuery } from 'jotai/query'
 import React, { Suspense, useTransition } from 'react'
 import axios from 'redaxios'
-import { paged } from '@srtp/core'
-import { Filter, Todo } from '../../todo'
 import { filteredTodos, pageCount } from '../common'
 import { FilterView, Pagination, TodoListView } from '../components'
 

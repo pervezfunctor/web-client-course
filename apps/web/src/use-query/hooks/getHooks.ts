@@ -6,7 +6,7 @@ import {
 import qs from 'query-string'
 import axios from 'redaxios'
 import { get } from '@srtp/ui'
-import { Todo } from '../../todo'
+import { Todo } from '@srtp/todo'
 import { itemCount, limit, pageCount } from '../common'
 
 export const getPagedTodos = async ({

@@ -1,6 +1,6 @@
 import { Box, Input, Text } from '@chakra-ui/react'
 import React from 'react'
-import { reducerHook } from '../../../packages/reducer/src'
+import { reducerHook } from '@srtp/reducer'
 
 const initial = { step: 1, count: 0 }
 

@@ -42,8 +42,9 @@ jspm_packages
 
 .tern-port
 
-build/
-out/
+build
+out
 yarn-error.log
 .pnpm-store
 .turbo
+.next

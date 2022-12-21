@@ -1,5 +1,5 @@
 import { providerHook } from '@srtp/reducer'
-import { createTodo, Filter, initialState, Todo } from '../todo'
+import { createTodo, Filter, initialState, Todo } from '@srtp/todo'
 
 export const { Provider, actions, useAction, useValue, useSelect } =
   providerHook(initialState, {

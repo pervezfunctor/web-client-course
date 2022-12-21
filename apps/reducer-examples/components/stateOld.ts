@@ -1,6 +1,6 @@
 import { action, actions, reducerProvider, sslice } from '@srtp/reducer'
 import { z } from 'zod'
-import { createTodo, CreateTodo, initialState, State, Todo } from '../todo'
+import { createTodo, CreateTodo, initialState, State, Todo } from '@srtp/todo'
 
 const TodoAction = actions([
   action('createTodo', CreateTodo),

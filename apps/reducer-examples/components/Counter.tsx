@@ -29,7 +29,7 @@ export const Counter = () => {
   )
 }
 
-export const App = () => (
+export const CounterApp = () => (
   <Provider>
     <Counter />
     <Counter />

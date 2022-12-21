@@ -1,9 +1,9 @@
 // Mutations
 
+import { Todo } from '@srtp/todo'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import axios from 'redaxios'
-import { Todo } from '../../todo'
 
 export const del = async (todoId: number) =>
   (await axios.delete(`/api/todos/${todoId}`)).data

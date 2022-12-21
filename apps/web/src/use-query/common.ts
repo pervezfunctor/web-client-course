@@ -1,5 +1,5 @@
 import { Response } from 'redaxios'
-import { Filter, Todo } from '../todo'
+import { Filter, Todo } from '@srtp/todo'
 
 export const limit = 15
 

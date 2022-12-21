@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useSnapshot } from 'valtio'
-import { Todo } from '../todo'
+import { Todo } from '@srtp/todo'
 import { deleteTodo, state, toggleTodo } from './state'
 
 export type TodoItemProps = Readonly<{ todo: Todo }>

@@ -1,8 +1,8 @@
 import { Box, Flex } from '@chakra-ui/react'
+import { paged } from '@srtp/core'
+import { Filter } from '@srtp/todo'
 import React from 'react'
 import invariant from 'tiny-invariant'
-import { paged } from '@srtp/core'
-import { Filter } from '../../todo'
 import { filteredTodos, pageCount } from '../common'
 import { useTodoMutations, useTodos } from '../hooks'
 

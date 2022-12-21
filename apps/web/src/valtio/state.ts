@@ -5,7 +5,7 @@ import {
   initialState,
   State,
   Todo,
-} from '../todo'
+} from '@srtp/todo'
 
 export const state: State = {
   todos: proxyMap<number, Todo>(initialState.todos),

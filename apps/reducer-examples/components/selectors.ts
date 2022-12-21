@@ -1,4 +1,4 @@
-import { State } from '../todo'
+import { State } from '@srtp/todo'
 
 export const filteredTodosSelector = (snap: State) => {
   const todoList = Array.from(snap.todos.values())

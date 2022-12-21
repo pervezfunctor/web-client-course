@@ -5,9 +5,6 @@ import { TodoList } from './TodoList'
 
 export const TodoApp = () => (
   <Provider>
-    <Container>
-      <TodoList />
-      {/* <App /> */}
-    </Container>
+    <TodoList />
   </Provider>
 )

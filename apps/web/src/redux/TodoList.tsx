@@ -11,7 +11,7 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Todo } from '../todo'
+import { Todo } from '@srtp/todo'
 import { useDispatch, useState } from './Context'
 
 export type TodoItemProps = Readonly<{

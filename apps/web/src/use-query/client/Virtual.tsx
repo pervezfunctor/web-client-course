@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react'
+import { Filter } from '@srtp/todo'
 import React from 'react'
 import invariant from 'tiny-invariant'
-import { Filter } from '../../todo'
 import { filteredTodos } from '../common'
 import { useTodoMutations, useTodos } from '../hooks'
 

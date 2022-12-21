@@ -1,12 +1,9 @@
-import React, {
-  Dispatch,
-  ReducerAction,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-} from 'react'
+import React, { Dispatch, ReducerAction } from 'react'
 import invariant from 'tiny-invariant'
 import { useImmerReducer } from 'use-immer'
+
+export const useIsomorphicEffect =
+  typeof document !== 'undefined' ? React.useLayoutEffect : React.useEffect
 
 type Reducer<S, A> = (prevState: S, action: A) => void
 
@@ -59,11 +56,11 @@ export function reducerProvider<R extends Reducer<any, any>>(
     const ref = React.useRef(handler)
     const dispatch = useDispatch()
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       ref.current = handler
     })
 
-    return useCallback((...args: Args) => {
+    return React.useCallback((...args: Args) => {
       dispatch(ref.current(...args))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -72,10 +69,10 @@ export function reducerProvider<R extends Reducer<any, any>>(
   function useSelect<A>(select: Selector<R, A>): A {
     const snapshot = useValue()
     const ref = React.useRef(select)
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       ref.current = select
     })
-    return useMemo(() => ref.current(snapshot), [snapshot])
+    return React.useMemo(() => ref.current(snapshot), [snapshot])
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
