@@ -48,3 +48,4 @@ yarn-error.log
 .pnpm-store
 .turbo
 .next
+tsconfig.tsbuildinfo

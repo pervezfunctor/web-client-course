@@ -6,12 +6,12 @@
   },
 
   "include": [
-    "pages/**/*.ts*",
+    "pages",
     "components",
     "next.config.js",
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "stories",
+    "mocks"
   ],
   "exclude": ["node_modules"]
 }

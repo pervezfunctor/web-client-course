@@ -4,15 +4,18 @@
 
   "pipeline": {
     "build": {
+      "dependsOn": ["^build"],
       "outputs": ["types", "dist/**"]
     },
     "lint": {
       "outputs": []
     },
     "types": {
+      "dependsOn": ["^types"],
       "outputs": []
     },
     "test": {
+      "dependsOn": ["^test"],
       "outputs": []
     }
   }

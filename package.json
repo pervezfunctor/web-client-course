@@ -3,12 +3,13 @@
     "turbo": "^1.6.3"
   },
   "scripts": {
-    "update": "pnpm add -g @pnpm/exe && pnpm ncu -u && pnpm i",
+    "update": "pnpm add -g @pnpm/exe && pnpm turbo update",
     "types": "pnpm turbo types",
     "lint": "pnpm turbo lint",
     "build": "pnpm turbo build",
     "test": "pnpm turbo test",
     "dev": "pnpm turbo dev",
+    "clean": "pnpm turbo clean",
     "ci": "pnpm run types lint"
   }
 }

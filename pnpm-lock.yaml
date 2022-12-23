@@ -23,8 +23,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': ^3.0.0
-      '@vitejs/plugin-react-refresh': 1.3.6
-      confusing-browser-globals: 1.0.11
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: workspace:*
       framer-motion: 8.0.0
@@ -74,8 +73,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 3.0.0_vite@4.0.2
-      '@vitejs/plugin-react-refresh': 1.3.6
-      confusing-browser-globals: 1.0.11
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: link:../../libs/eslint-config-srtp
       npm-check-updates: 16.6.0
@@ -215,6 +213,7 @@ importers:
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react-refresh': 1.3.6
       confusing-browser-globals: 1.0.11
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: workspace:*
       framer-motion: 8.0.0
@@ -258,6 +257,7 @@ importers:
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react-refresh': 1.3.6
       confusing-browser-globals: 1.0.11
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: link:../../libs/eslint-config-srtp
       npm-check-updates: 16.6.0
@@ -290,6 +290,7 @@ importers:
       '@types/react-window-infinite-loader': 1.0.6
       '@vitejs/plugin-react': ^3.0.0
       concurrently: 7.6.0
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: workspace:*
       framer-motion: 7.9.1
@@ -329,6 +330,7 @@ importers:
       '@srtp/ui': link:../../libs/ui
       '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
       '@vitejs/plugin-react': 3.0.0_vite@4.0.2
+      framer-motion: 7.9.1_biqbaboplfbrettd7655fr4n2y
       immer: 9.0.16
       jotai: 1.11.2_jrnm3pnuxme5xmsusivekznrni
       jotai-immer: 0.1.0_icchxyuqzj2r42m4lbofg5dolu
@@ -359,9 +361,9 @@ importers:
       '@types/react-window': 1.8.5
       '@types/react-window-infinite-loader': 1.0.6
       concurrently: 7.6.0
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: link:../../libs/eslint-config-srtp
-      framer-motion: 7.9.1_biqbaboplfbrettd7655fr4n2y
       json-server: 0.17.1
       npm-check-updates: 16.6.0
       prettier: 2.8.1
@@ -385,6 +387,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 3.0.0
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: workspace:*
       framer-motion: 8.0.0
@@ -432,6 +435,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 3.0.0_vite@4.0.2
+      cross-env: 7.0.3
       eslint: 8.30.0
       eslint-config-srtp: link:../../libs/eslint-config-srtp
       npm-check-updates: 16.6.0
@@ -455,6 +459,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': ^3.0.0
+      cross-env: 7.0.3
       eslint-config-srtp: workspace:*
       framer-motion: 7.9.1
       immer: 9.0.16
@@ -465,7 +470,6 @@ importers:
       react-dom: 18.2.0
       react-error-boundary: 3.1.4
       redaxios: 0.5.1
-      redux: 4.2.0
       rimraf: 3.0.2
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
@@ -490,7 +494,6 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
       redaxios: 0.5.1
-      redux: 4.2.0
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
       ts-essentials: 9.3.0_typescript@4.9.4
@@ -506,6 +509,7 @@ importers:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 3.0.0_vite@4.0.1
+      cross-env: 7.0.3
       eslint-config-srtp: link:../../libs/eslint-config-srtp
       npm-check-updates: 16.6.0
       prettier: 2.8.1
@@ -518,6 +522,7 @@ importers:
     specifiers:
       '@srtp/tsconfig': workspace:*
       '@types/node': 18.11.15
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: workspace:*
       immer: 9.0.16
@@ -540,6 +545,7 @@ importers:
     devDependencies:
       '@srtp/tsconfig': link:../tsconfig-srtp
       '@types/node': 18.11.15
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: link:../eslint-config-srtp
       prettier: 2.8.1
@@ -586,6 +592,7 @@ importers:
       '@types/node': 18.11.15
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: workspace:*
       immer: 9.0.16
@@ -594,7 +601,6 @@ importers:
       react-dom: 18.2.0
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
-      ts-essentials: 9.3.0
       tslib: 2.4.1
       tsup: ' 6.5.0'
       typescript: 4.9.4
@@ -607,7 +613,6 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
-      ts-essentials: 9.3.0_typescript@4.9.4
       tslib: 2.4.1
       use-immer: 0.8.1_immer@9.0.16+react@18.2.0
       zod: 3.20.2
@@ -616,6 +621,7 @@ importers:
       '@types/node': 18.11.15
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: link:../eslint-config-srtp
       prettier: 2.8.1
@@ -634,6 +640,7 @@ importers:
       '@types/node': 18.11.15
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: workspace:*
       prettier: 2.8.1
@@ -656,6 +663,7 @@ importers:
       '@types/node': 18.11.15
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
+      cross-env: 7.0.3
       eslint: 8.29.0
       eslint-config-srtp: link:../eslint-config-srtp
       prettier: 2.8.1
@@ -669,11 +677,8 @@ importers:
       '@types/node': 18.11.15
       eslint: 8.29.0
       eslint-config-srtp: workspace:*
-      immer: 9.0.16
       prettier: 2.8.1
-      tiny-invariant: 1.3.1
-      tiny-warning: 1.0.3
-      ts-essentials: 9.3.0
+      rimraf: 3.0.2
       tslib: 2.4.1
       tsup: ' 6.5.0'
       typescript: 4.9.4
@@ -682,10 +687,6 @@ importers:
     dependencies:
       '@srtp/core': link:../../libs/core
       '@types/node': 18.11.15
-      immer: 9.0.16
-      tiny-invariant: 1.3.1
-      tiny-warning: 1.0.3
-      ts-essentials: 9.3.0_typescript@4.9.4
       tslib: 2.4.1
       zod: 3.20.2
     devDependencies:
@@ -693,6 +694,7 @@ importers:
       eslint: 8.29.0
       eslint-config-srtp: link:../../libs/eslint-config-srtp
       prettier: 2.8.1
+      rimraf: 3.0.2
       tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
       vitest: 0.25.8
@@ -2448,7 +2450,7 @@ packages:
       '@emotion/react': '>=10.0.35'
       react: '>=18'
     dependencies:
-      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
+      '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
       react: 18.2.0
     dev: false
 
@@ -3059,8 +3061,8 @@ packages:
       '@chakra-ui/react-env': 2.0.11_react@18.2.0
       '@chakra-ui/system': 2.3.4_dovxhg2tvkkxkdnqyoum6wzcxm
       '@chakra-ui/utils': 2.0.12
-      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
-      '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
+      '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
+      '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -3435,8 +3437,8 @@ packages:
       '@chakra-ui/transition': 2.0.12_hp2gfviqdgiugczkmkvnlf2s2i
       '@chakra-ui/utils': 2.0.12
       '@chakra-ui/visually-hidden': 2.0.13_xivvz2l3eyrkvszadds3phcwaq
-      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
-      '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
+      '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
+      '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
       framer-motion: 7.9.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -3711,8 +3713,8 @@ packages:
       '@chakra-ui/styled-system': 2.4.0
       '@chakra-ui/theme-utils': 2.0.5
       '@chakra-ui/utils': 2.0.12
-      '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
-      '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
+      '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
+      '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
       react: 18.2.0
       react-fast-compare: 3.2.0
     dev: false
@@ -4156,6 +4158,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@emotion/memoize': 0.7.4
+    dev: false
     optional: true
 
   /@emotion/is-prop-valid/1.2.0:
@@ -4166,6 +4169,7 @@ packages:
 
   /@emotion/memoize/0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    dev: false
     optional: true
 
   /@emotion/memoize/0.8.0:
@@ -4689,6 +4693,7 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       tslib: 2.4.1
+    dev: false
 
   /@motionone/dom/10.15.3:
     resolution: {integrity: sha512-FQ7a2zMBXc1UeU8CG9G3yDpst55fbb0+C9A0VGfwOITitBCzigKZnXRgsRSWWR+FW57GSc13eGQxtYB0lKG0Ng==}
@@ -4699,12 +4704,14 @@ packages:
       '@motionone/utils': 10.15.1
       hey-listen: 1.0.8
       tslib: 2.4.1
+    dev: false
 
   /@motionone/easing/10.15.1:
     resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
     dependencies:
       '@motionone/utils': 10.15.1
       tslib: 2.4.1
+    dev: false
 
   /@motionone/generators/10.15.1:
     resolution: {integrity: sha512-67HLsvHJbw6cIbLA/o+gsm7h+6D4Sn7AUrB/GPxvujse1cGZ38F5H7DzoH7PhX+sjvtDnt2IhFYF2Zp1QTMKWQ==}
@@ -4712,9 +4719,11 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       tslib: 2.4.1
+    dev: false
 
   /@motionone/types/10.15.1:
     resolution: {integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==}
+    dev: false
 
   /@motionone/utils/10.15.1:
     resolution: {integrity: sha512-p0YncgU+iklvYr/Dq4NobTRdAPv9PveRDUXabPEeOjBLSO/1FNB2phNTZxOxpi1/GZwYpAoECEa0Wam+nsmhSw==}
@@ -4722,6 +4731,7 @@ packages:
       '@motionone/types': 10.15.1
       hey-listen: 1.0.8
       tslib: 2.4.1
+    dev: false
 
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -11479,6 +11489,7 @@ packages:
       tslib: 2.4.0
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
+    dev: false
 
   /framer-motion/8.0.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-MH5oWf2kBxoMlo8apN/9rAV3GiVgPWOQTW2RES9LxayKUCbdsvcxIvR9AQOD6se8+glWKrnrOhNBvVtOSonFJw==}
@@ -12072,6 +12083,7 @@ packages:
 
   /hey-listen/1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
+    dev: false
 
   /hmac-drbg/1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
@@ -15968,12 +15980,6 @@ packages:
     dev: true
     optional: true
 
-  /redux/4.2.0:
-    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
-    dependencies:
-      '@babel/runtime': 7.20.6
-    dev: false
-
   /regenerate-unicode-properties/10.1.0:
     resolution: {integrity: sha512-d1VudCLoIGitcU/hEg2QqvyGZQmdC0Lf8BqdOMXGFSvJP4bNV1+XqbPQeHHLD51Jh4QJJ225dlIFvY4Ly6MXmQ==}
     engines: {node: '>=4'}
@@ -17435,6 +17441,7 @@ packages:
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: false
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
