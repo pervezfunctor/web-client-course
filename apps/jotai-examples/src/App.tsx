@@ -1,8 +1,16 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import { TodoApp } from './components'
+import { enableMapSet } from 'immer'
+import { Provider } from 'jotai'
+import { TodoApp } from './examples'
+import { DecCounter } from './examples/DecCounter'
+
+enableMapSet()
 
 export const App = () => (
   <ChakraProvider>
-    <TodoApp />
+    <Provider>
+      <DecCounter />
+      <TodoApp />
+    </Provider>
   </ChakraProvider>
 )

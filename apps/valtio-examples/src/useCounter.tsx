@@ -1,8 +1,7 @@
 import { Box, Button, Text } from '@chakra-ui/react'
-import React from 'react'
-import { reducerHook } from '@srtp/reducer'
+import { sliceHook } from '@srtp/reducer'
 
-export const useCounter = reducerHook(
+export const useCounter = sliceHook(
   { count: 0 },
   {
     onInc(state) {

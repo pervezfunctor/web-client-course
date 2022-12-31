@@ -1,5 +1,5 @@
 import { delay } from '@srtp/core'
-import { reducer, useReducer } from '@srtp/reducer'
+import { slice, useSlice } from '@srtp/reducer'
 import React from 'react'
 import axios from 'redaxios'
 
@@ -15,7 +15,7 @@ const initial: FetchState = {
   isLoading: true,
 }
 
-const slice = reducer(initial, {
+const fetchSlice = slice(initial, {
   success(draft, data: unknown) {
     draft.data = data
     draft.error = undefined
@@ -28,7 +28,7 @@ const slice = reducer(initial, {
 })
 
 export function useFetch(url: string): FetchState {
-  const [state, actions] = useReducer(slice)
+  const [state, actions] = useSlice(fetchSlice)
 
   React.useEffect(() => {
     let cancelled = false
@@ -49,7 +49,7 @@ export function useFetch(url: string): FetchState {
     return () => {
       cancelled = true
     }
-  }, [url])
+  }, [url, actions])
 
   return state
 }

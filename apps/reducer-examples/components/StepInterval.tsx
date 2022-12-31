@@ -1,10 +1,10 @@
 import { Box, Input, Text } from '@chakra-ui/react'
 import React from 'react'
-import { reducerHook } from '@srtp/reducer'
+import { sliceHook } from '@srtp/reducer'
 
 const initial = { step: 1, count: 0 }
 
-const useStep = reducerHook(initial, {
+const useStep = sliceHook(initial, {
   next(draft) {
     draft.count++
   },

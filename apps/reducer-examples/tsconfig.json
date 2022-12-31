@@ -11,7 +11,8 @@
     "next.config.js",
     "next-env.d.ts",
     "stories",
-    "mocks"
+    "mocks",
+    "__previewjs__"
   ],
   "exclude": ["node_modules"]
 }
