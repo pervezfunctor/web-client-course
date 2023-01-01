@@ -13,7 +13,8 @@
   "author": "Pervez Iqbal",
   "license": "MIT",
   "scripts": {
-    "update": "pnpm ncu -u && pnpm i",
+    "update": "pnpm ncu -u",
+    "update": "pnpm ncu -u",
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts",
     "types:dev": "tsc --noEmit -p . --watch",
@@ -27,19 +28,19 @@
   },
   "dependencies": {
     "@srtp/core": "workspace:*",
-    "@types/node": "18.11.15",
+    "@types/node": "18.11.18",
     "tslib": "2.4.1",
     "zod": "3.20.2"
   },
   "devDependencies": {
     "@srtp/tsconfig": "workspace:*",
-    "@types/node": "18.11.15",
-    "eslint": "8.29.0",
+    "@types/node": "18.11.18",
+    "eslint": "8.31.0",
     "eslint-config-srtp": "workspace:*",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
     "tsup": " 6.5.0",
     "typescript": "4.9.4",
-    "vitest": "0.25.8"
+    "vitest": "0.26.2"
   }
 }

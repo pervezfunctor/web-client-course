@@ -14,13 +14,21 @@ export function useValue<Value>(
   return useAtomValue(signal)
 }
 
+type SetAtom<Update, Result> =
+  | (undefined extends Update
+      ? (draft?: Draft<Update>) => Result
+      : (draft: Draft<Update>) => Result)
+  | (undefined extends Update
+      ? (update?: Update) => Result
+      : (update: Update) => Result)
+
 export function useAction<Value, Update, Result extends void | Promise<void>>(
   atom: WritableAtom<Value, Update, Result>,
-) {
+): SetAtom<Update, Result> {
   const set = useSetAtom(atom)
 
   return React.useCallback(
-    (fn?: Value | ((draft: Draft<Value>) => void)) => {
+    (fn: any) => {
       if (is(z.function(), fn)) {
         set(produce(fn) as any)
       } else {
@@ -28,7 +36,7 @@ export function useAction<Value, Update, Result extends void | Promise<void>>(
       }
     },
     [set],
-  )
+  ) as SetAtom<Update, Result>
 }
 
 export function useActionHook<Value, P extends any[]>(
