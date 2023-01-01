@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
-import type { PrimitiveAtom } from 'jotai'
-import { atom, Provider, useAtom } from 'jotai'
+import { signal, useAction, useValue } from '@srtp/jotai'
+import { PrimitiveAtom, useAtom } from 'jotai'
+import { Provider } from 'jotai'
 import { focusAtom } from 'jotai-optics'
-import { useAtomCallback } from 'jotai/utils'
+import { splitAtom, useAtomCallback } from 'jotai/utils'
 import { useCallback, useMemo } from 'react'
 import { initialValue } from './initialValue'
-import { useAtomSlice } from './useAtomSlice'
+
+function useAtomSlice<Item>(arrAtom: PrimitiveAtom<Item[]>) {
+  const [atoms, remove] = useAtom(useMemo(() => splitAtom(arrAtom), [arrAtom]))
+  return useMemo(
+    () => atoms.map(itemAtom => [itemAtom, () => remove(itemAtom)] as const),
+    [atoms, remove],
+  )
+}
 
 const Field = ({
   fieldAtom,
@@ -24,8 +32,11 @@ const Field = ({
     () => focusAtom(fieldAtom, o => o.prop('value')),
     [fieldAtom],
   )
-  const [name, setName] = useAtom(nameAtom)
-  const [value, setValue] = useAtom(valueAtom)
+  const name = useValue(nameAtom)
+  const setName = useAction(nameAtom)
+  const value = useValue(valueAtom)
+  const setValue = useAction(valueAtom)
+
   return (
     <div>
       <input type="text" value={name} onChange={e => setName(e.target.value)} />
@@ -67,7 +78,9 @@ const Form = ({
   )
 
   const fieldAtoms = useAtomSlice(objectsAtom)
-  const [name, setName] = useAtom(nameAtom)
+  const name = useValue(nameAtom)
+  const setName = useAction(nameAtom)
+
   const addField = useAtomCallback(
     useCallback(
       (get, set) => {
@@ -147,7 +160,7 @@ const FormList = ({
   )
 }
 
-const formListAtom = atom(initialValue)
+const formListAtom = signal(initialValue)
 
 export function App() {
   return (
