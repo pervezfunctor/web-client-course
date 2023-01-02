@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/filename-case */
+
 /// <reference types="next" />
 /// <reference types="next/image-types/global" />
 
