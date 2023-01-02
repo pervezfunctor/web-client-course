@@ -1,5 +1,6 @@
 import { Todo, State } from './model'
 
+// replace with chance.js
 export const todoList: readonly Todo[] = [
   {
     id: 1,
